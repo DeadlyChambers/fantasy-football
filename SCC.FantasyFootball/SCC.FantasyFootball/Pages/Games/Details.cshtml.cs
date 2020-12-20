@@ -11,9 +11,9 @@ namespace SCC.FantasyFootball.Pages.Games
 {
     public class DetailsModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
 
-        public DetailsModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public DetailsModel(SCC.FantasyFootball.DataAccess.FootballContext context)
         {
             _context = context;
         }

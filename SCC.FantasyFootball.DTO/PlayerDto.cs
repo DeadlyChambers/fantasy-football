@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SCC.FantasyFootball.Common.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,14 @@ namespace SCC.FantasyFootball.DTO
         public string College { get; set; }
         public DateTime Createddate { get; set; }
         public DateTime? Modifieddate { get; set; }
-        public string[] Positions { get; set; }
-        public string Status { get; set; }
+        [EnumDataType(typeof(PlayerPosition))]
+        public PlayerPosition Positions { get; set; }
+        [EnumDataType(typeof(PlayerStatus))]
+        public PlayerStatus Status { get; set; }
         public short? DraftYear { get; set; }
         public DateTime Dob { get; set; }
-        public string PlayingStatus { get; set; }
+        [EnumDataType(typeof(PlayerGameStatus))]
+        public PlayerGameStatus PlayingStatus { get; set; }
 
         public IList<StatDto> Stats { get; set; }
     }

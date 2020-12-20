@@ -5,18 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Enums;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DTO;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
     public class CreateModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly ITeamsManager _teamsManager;
 
-        public CreateModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public CreateModel(ITeamsManager teamsManager)
         {
-            _context = context;
+            _teamsManager = teamsManager;
         }
 
         public IActionResult OnGet()
@@ -25,7 +27,7 @@ namespace SCC.FantasyFootball.Pages.Teams
         }
 
         [BindProperty]
-        public Team Team { get; set; }
+        public TeamDto Team { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -34,10 +36,7 @@ namespace SCC.FantasyFootball.Pages.Teams
             {
                 return Page();
             }
-            Team.Createddate = DateTime.Now;
-
-            _context.Teams.Add(Team);
-            await _context.SaveChangesAsync();
+            Team = await _teamsManager.AddAsync(Team);
 
             return RedirectToPage("./Index");
         }

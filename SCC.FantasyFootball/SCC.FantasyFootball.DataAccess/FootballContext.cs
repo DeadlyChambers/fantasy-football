@@ -4,13 +4,13 @@
 
 namespace SCC.FantasyFootball.DataAccess
 {
-    public partial class postgresContext : DbContext
+    public partial class FootballContext : DbContext
     {
-        public postgresContext()
+        public FootballContext()
         {
         }
 
-        public postgresContext(DbContextOptions<postgresContext> options)
+        public FootballContext(DbContextOptions<FootballContext> options)
             : base(options)
         {
         }
@@ -24,7 +24,8 @@ namespace SCC.FantasyFootball.DataAccess
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning Use the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //Use the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. 
+                //For more guidance on storing connection strings,see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseNpgsql("ConnectionStrings:sccContext");
             }
         }
@@ -203,7 +204,7 @@ namespace SCC.FantasyFootball.DataAccess
                 entity.ToTable("teams");
 
                 entity.Property(e => e.Teamid)
-                    
+
                     .HasColumnName("teamid")
                     .UseIdentityAlwaysColumn();
 

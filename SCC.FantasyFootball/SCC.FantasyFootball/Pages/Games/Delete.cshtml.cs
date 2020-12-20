@@ -11,9 +11,9 @@ namespace SCC.FantasyFootball.Pages.Games
 {
     public class DeleteModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
 
-        public DeleteModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public DeleteModel(SCC.FantasyFootball.DataAccess.FootballContext context)
         {
             _context = context;
         }

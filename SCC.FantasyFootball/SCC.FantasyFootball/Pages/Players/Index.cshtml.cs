@@ -11,9 +11,9 @@ namespace SCC.FantasyFootball.Pages.Players
 {
     public class IndexModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
 
-        public IndexModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public IndexModel(SCC.FantasyFootball.DataAccess.FootballContext context)
         {
             _context = context;
         }

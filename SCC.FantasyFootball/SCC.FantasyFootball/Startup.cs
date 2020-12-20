@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DTO.Profiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +30,16 @@ namespace SCC.FantasyFootball
         {
             services.AddRazorPages();
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper((serviceProvider, autoMapper)=>
+            {
+                autoMapper.AddProfile(new AutoMappingProfile());
+                //autoMapper.UseEntityFrameworkCoreModel(serviceProvider);
+            }, AppDomain.CurrentDomain.GetAssemblies());
 
-            _ = services.AddDbContext<postgresContext>(options =>
+            _ = services.AddDbContext<FootballContext>(options =>
             options.UseNpgsql(Configuration["ConnectionStrings:sccContext"]));
-           
-      // options.UseNpgsql(Configuration.GetConnectionString("postgresContext")));
+
+            ConfigureDI(services);
         }
         
 
@@ -62,6 +68,15 @@ namespace SCC.FantasyFootball
             {
                 endpoints.MapRazorPages();
             });
+        }
+
+        /// <summary>
+        /// Setup the various custom DI impleminations/interfaces
+        /// </summary>
+        /// <param name="services"></param>
+        private void ConfigureDI(IServiceCollection services)
+        {
+            services.AddTransient<ITeamsManager, TeamsManager>();
         }
     }
 }

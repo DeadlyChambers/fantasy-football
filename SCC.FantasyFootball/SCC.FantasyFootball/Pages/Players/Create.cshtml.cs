@@ -12,12 +12,12 @@ namespace SCC.FantasyFootball.Pages.Players
 {
     public class CreateModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
         public PlayerGameStatus PlayerGameStatus { get; set; }
         public PlayerStatus PlayerStatus { get;set; }
 
 
-        public CreateModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public CreateModel(SCC.FantasyFootball.DataAccess.FootballContext context)
         {
             _context = context;
         }

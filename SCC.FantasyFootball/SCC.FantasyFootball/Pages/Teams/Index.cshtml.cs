@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.Common.Utilities;
+using SCC.FantasyFootball.DTO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.DataAccess;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
     public class IndexModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
-
-        public IndexModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        private readonly ITeamsManager _teamsManager;
+        public IndexModel(ITeamsManager teamsManager)
         {
-            _context = context;
+            _teamsManager = teamsManager;
         }
 
-        public IList<Team> Team { get;set; }
 
-        public async Task OnGetAsync()
+        public PagedList<TeamDto> PagedRecords { get;set; } 
+
+        public async Task OnGetAsync(int? pageIndex)
         {
-            Team = await _context.Teams.ToListAsync();
+            if (PagedRecords == null)
+                PagedRecords = new PagedList<TeamDto>();
+            if (pageIndex.HasValue)
+                PagedRecords.CurrentPage = pageIndex.Value;
+            PagedRecords = await _teamsManager.GetPageAsync(PagedRecords);
         }
     }
 }

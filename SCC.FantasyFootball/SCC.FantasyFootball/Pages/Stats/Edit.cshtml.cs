@@ -12,9 +12,9 @@ namespace SCC.FantasyFootball.Pages.Stats
 {
     public class EditModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
 
-        public EditModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public EditModel(SCC.FantasyFootball.DataAccess.FootballContext context)
         {
             _context = context;
         }
