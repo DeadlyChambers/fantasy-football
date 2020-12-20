@@ -1,0 +1,60 @@
+﻿@page
+@model SCC.FantasyFootball.Pages.Games.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Gamedate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Homescore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Awayscore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Awayteam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Hometeam)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Game) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gamedate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Homescore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Awayscore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Awayteam.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hometeam.Name)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Gameid">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Gameid">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Gameid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

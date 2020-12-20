@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SCC.FantasyFootball.Common\SCC.FantasyFootball.Common.csproj" />
+    <ProjectReference Include="..\SCC.FantasyFootball\SCC.FantasyFootball.DataAccess\SCC.FantasyFootball.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

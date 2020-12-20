@@ -1,0 +1,151 @@
+﻿@page
+@model SCC.FantasyFootball.Pages.Stats.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Stat</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Stat.Gameid" class="control-label"></label>
+                <select asp-for="Stat.Gameid" class="form-control" asp-items="ViewBag.Gameid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Teamid" class="control-label"></label>
+                <select asp-for="Stat.Teamid" class="form-control" asp-items="ViewBag.Teamid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Playerid" class="control-label"></label>
+                <select asp-for="Stat.Playerid" class="form-control" asp-items="ViewBag.Playerid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Passingattempts" class="control-label"></label>
+                <input value="0" asp-for="Stat.Passingattempts" class="form-control" />
+                <span asp-validation-for="Stat.Passingattempts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Passingcompletions" class="control-label"></label>
+                <input value="0" asp-for="Stat.Passingcompletions" class="form-control" />
+                <span asp-validation-for="Stat.Passingcompletions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Passingyards" class="control-label"></label>
+                <input value="0" asp-for="Stat.Passingyards" class="form-control" />
+                <span asp-validation-for="Stat.Passingyards" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Passingtds" class="control-label"></label>
+                <input value="0" asp-for="Stat.Passingtds" class="form-control" />
+                <span asp-validation-for="Stat.Passingtds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Interceptions" class="control-label"></label>
+                <input value="0" asp-for="Stat.Interceptions" class="form-control" />
+                <span asp-validation-for="Stat.Interceptions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Fumbles" class="control-label"></label>
+                <input value="0" asp-for="Stat.Fumbles" class="form-control" />
+                <span asp-validation-for="Stat.Fumbles" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Receptions" class="control-label"></label>
+                <input value="0" asp-for="Stat.Receptions" class="form-control" />
+                <span asp-validation-for="Stat.Receptions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Targets" class="control-label"></label>
+                <input value="0" asp-for="Stat.Targets" class="form-control" />
+                <span asp-validation-for="Stat.Targets" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Drops" class="control-label"></label>
+                <input value="0" asp-for="Stat.Drops" class="form-control" />
+                <span asp-validation-for="Stat.Drops" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Receivingyards" class="control-label"></label>
+                <input value="0" asp-for="Stat.Receivingyards" class="form-control" />
+                <span asp-validation-for="Stat.Receivingyards" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Receivingtds" class="control-label"></label>
+                <input value="0" asp-for="Stat.Receivingtds" class="form-control" />
+                <span asp-validation-for="Stat.Receivingtds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Rushingattempts" class="control-label"></label>
+                <input value="0" asp-for="Stat.Rushingattempts" class="form-control" />
+                <span asp-validation-for="Stat.Rushingattempts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Rushingyards" class="control-label"></label>
+                <input value="0" asp-for="Stat.Rushingyards" class="form-control" />
+                <span asp-validation-for="Stat.Rushingyards" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Rushingtds" class="control-label"></label>
+                <input value="0" asp-for="Stat.Rushingtds" class="form-control" />
+                <span asp-validation-for="Stat.Rushingtds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Otheryards" class="control-label"></label>
+                <input value="0" asp-for="Stat.Otheryards" class="form-control" />
+                <span asp-validation-for="Stat.Otheryards" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Othertds" class="control-label"></label>
+                <input value="0" asp-for="Stat.Othertds" class="form-control" />
+                <span asp-validation-for="Stat.Othertds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Twopointconversion" class="control-label"></label>
+                <input value="0" asp-for="Stat.Twopointconversion" class="form-control" />
+                <span asp-validation-for="Stat.Twopointconversion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Points" class="control-label"></label>
+                <input value="0" asp-for="Stat.Points" class="form-control" />
+                <span asp-validation-for="Stat.Points" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Rztarget" class="control-label"></label>
+                <input value="0" asp-for="Stat.Rztarget" class="form-control" />
+                <span asp-validation-for="Stat.Rztarget" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Rzrush" class="control-label"></label>
+                <input value="0" asp-for="Stat.Rzrush" class="form-control" />
+                <span asp-validation-for="Stat.Rzrush" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input checked="checked" class="form-check-input" asp-for="Stat.Started" /> @Html.DisplayNameFor(model => model.Stat.Started)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stat.Snaps" class="control-label"></label>
+                <input value="0" asp-for="Stat.Snaps" class="form-control" />
+                <span asp-validation-for="Stat.Snaps" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

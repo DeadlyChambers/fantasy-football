@@ -1,0 +1,180 @@
+﻿@page
+@model SCC.FantasyFootball.Pages.Stats.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Passingattempts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Passingcompletions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Passingyards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Passingtds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Interceptions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Fumbles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Receptions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Targets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Drops)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Receivingyards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Receivingtds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Rushingattempts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Rushingyards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Rushingtds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Otheryards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Othertds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Twopointconversion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Rztarget)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Rzrush)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Started)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Snaps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Game)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Player)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stat[0].Team)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Stat) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passingattempts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passingcompletions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passingyards)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passingtds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Interceptions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fumbles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receptions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Targets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drops)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receivingyards)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receivingtds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rushingattempts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rushingyards)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rushingtds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Otheryards)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Othertds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Twopointconversion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Points)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rztarget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rzrush)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Started)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Snaps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game.Gameid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.Conference)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

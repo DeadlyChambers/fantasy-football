@@ -1,0 +1,52 @@
+﻿@page
+@model SCC.FantasyFootball.Pages.Games.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Game</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Game.Hometeamid" class="control-label"></label>
+                <select asp-for="Game.Hometeamid" class ="form-control" asp-items="ViewBag.Hometeamid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Game.Awayteamid" class="control-label"></label>
+                <select asp-for="Game.Awayteamid" class ="form-control" asp-items="ViewBag.Awayteamid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Game.Gamedate" class="control-label"></label>
+                <input asp-for="Game.Gamedate" class="form-control" />
+                <span asp-validation-for="Game.Gamedate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Game.Homescore" class="control-label"></label>
+                <input asp-for="Game.Homescore" class="form-control" />
+                <span asp-validation-for="Game.Homescore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Game.Awayscore" class="control-label"></label>
+                <input asp-for="Game.Awayscore" class="form-control" />
+                <span asp-validation-for="Game.Awayscore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

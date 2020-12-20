@@ -1,0 +1,168 @@
+﻿@page
+@model SCC.FantasyFootball.Pages.Stats.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Stat</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Passingattempts)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Passingattempts)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Passingcompletions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Passingcompletions)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Passingyards)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Passingyards)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Interceptions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Interceptions)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Fumbles)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Fumbles)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Receptions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Receptions)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Targets)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Targets)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Drops)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Drops)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Receivingyards)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Receivingyards)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Receivingtds)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Receivingtds)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Rushingattempts)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Rushingattempts)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Rushingyards)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Rushingyards)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Rushingtds)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Rushingtds)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Otheryards)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Otheryards)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Othertds)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Othertds)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Twopointconversion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Twopointconversion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Points)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Points)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Rztarget)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Rztarget)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Rzrush)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Rzrush)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Started)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Started)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Snaps)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Snaps)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Game)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Game.Gameid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Player)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Player.Firstname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stat.Team)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stat.Team.Conference)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Stat.Gameid" />
+        <input type="hidden" asp-for="Stat.Teamid" />
+        <input type="hidden" asp-for="Stat.Playerid" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

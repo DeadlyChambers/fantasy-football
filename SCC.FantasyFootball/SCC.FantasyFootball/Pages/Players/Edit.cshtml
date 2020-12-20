@@ -1,0 +1,85 @@
+﻿@page
+@model SCC.FantasyFootball.Pages.Players.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Player</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Player.Playerid" />
+            <div class="form-group">
+                <label asp-for="Player.Firstname" class="control-label"></label>
+                <input asp-for="Player.Firstname" class="form-control" />
+                <span asp-validation-for="Player.Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Lastname" class="control-label"></label>
+                <input asp-for="Player.Lastname" class="form-control" />
+                <span asp-validation-for="Player.Lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Middlename" class="control-label"></label>
+                <input asp-for="Player.Middlename" class="form-control" />
+                <span asp-validation-for="Player.Middlename" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Height" class="control-label"></label>
+                <input asp-for="Player.Height" class="form-control" />
+                <span asp-validation-for="Player.Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Weight" class="control-label"></label>
+                <input asp-for="Player.Weight" class="form-control" />
+                <span asp-validation-for="Player.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.College" class="control-label"></label>
+                <input asp-for="Player.College" class="form-control" />
+                <span asp-validation-for="Player.College" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Positions" class="control-label"></label>
+                <input asp-for="Player.Positions" class="form-control" />
+                <span asp-validation-for="Player.Positions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Status" class="control-label"></label>
+                <input asp-for="Player.Status" class="form-control" />
+                <span asp-validation-for="Player.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.DraftYear" class="control-label"></label>
+                <input asp-for="Player.DraftYear" class="form-control" />
+                <span asp-validation-for="Player.DraftYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Dob" class="control-label"></label>
+                <input asp-for="Player.Dob" class="form-control" />
+                <span asp-validation-for="Player.Dob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.PlayingStatus" class="control-label"></label>
+                <input asp-for="Player.PlayingStatus" class="form-control" />
+                <span asp-validation-for="Player.PlayingStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

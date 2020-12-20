@@ -1,0 +1,108 @@
+﻿@page
+@model SCC.FantasyFootball.Pages.Players.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Middlename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].College)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Createddate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Modifieddate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Positions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].DraftYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].PlayingStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Player) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Middlename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.College)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Createddate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modifieddate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Positions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DraftYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayingStatus)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Playerid">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Playerid">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Playerid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
