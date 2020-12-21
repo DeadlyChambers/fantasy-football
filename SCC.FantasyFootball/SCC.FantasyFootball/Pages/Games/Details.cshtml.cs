@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.DTO;
+using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Games
 {
     public class DetailsModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
+        private readonly IEntitiesManager<GameDto> _entitiesManager;
 
-        public DetailsModel(SCC.FantasyFootball.DataAccess.FootballContext context)
+        public DetailsModel(IEntitiesManager<GameDto> entitiesManager)
         {
-            _context = context;
+            _entitiesManager = entitiesManager;
         }
 
-        public Game Game { get; set; }
+        public GameDto Game { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -26,10 +23,7 @@ namespace SCC.FantasyFootball.Pages.Games
             {
                 return NotFound();
             }
-
-            Game = await _context.Games
-                .Include(g => g.Awayteam)
-                .Include(g => g.Hometeam).FirstOrDefaultAsync(m => m.Gameid == id);
+            Game = await _entitiesManager.GetOrDefaultAsync(id.Value);
 
             if (Game == null)
             {

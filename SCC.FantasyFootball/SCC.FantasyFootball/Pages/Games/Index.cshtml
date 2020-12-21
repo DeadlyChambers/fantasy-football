@@ -14,47 +14,89 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Game[0].Gamedate)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Gamedate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game[0].Homescore)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Homescore)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game[0].Awayscore)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Awayscore)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game[0].Awayteam)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Awayteam)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game[0].Hometeam)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Hometeam)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Game) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gamedate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Homescore)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Awayscore)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Awayteam.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hometeam.Name)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Gameid">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Gameid">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Gameid">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.PagedRecords.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gamedate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Homescore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Awayscore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Awayteam.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hometeam.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@{
+    var prevDisabled = !Model.PagedRecords.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.PagedRecords.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.PagedRecords.CurrentPage - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.PagedRecords.CurrentPage  + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
+<dl class="row">
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.PageSize)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.PageSize)
+    </dd>
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.CurrentPage)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.CurrentPage)
+    </dd>
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.TotalPages)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.TotalPages)
+    </dd>
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.TotalRecords)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.TotalRecords)
+    </dd>
+

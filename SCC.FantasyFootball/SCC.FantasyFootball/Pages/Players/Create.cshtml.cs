@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using SCC.FantasyFootball.Common.Enums;
-using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.DTO;
+using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Players
 {
     public class CreateModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
-        public PlayerGameStatus PlayerGameStatus { get; set; }
-        public PlayerStatus PlayerStatus { get;set; }
+        private readonly IEntitiesManager<PlayerDto> _playersManager;
 
-
-        public CreateModel(SCC.FantasyFootball.DataAccess.FootballContext context)
+        public CreateModel(IEntitiesManager<PlayerDto> playersManager)
         {
-            _context = context;
+            _playersManager = playersManager;
         }
+
 
         public IActionResult OnGet()
         {
@@ -28,7 +22,7 @@ namespace SCC.FantasyFootball.Pages.Players
         }
 
         [BindProperty]
-        public Player Player { get; set; }
+        public PlayerDto Player { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -37,10 +31,7 @@ namespace SCC.FantasyFootball.Pages.Players
             {
                 return Page();
             }
-            Player.Createddate = DateTime.Now;
-
-            _context.Players.Add(Player);
-            await _context.SaveChangesAsync();
+            Player = await _playersManager.AddAsync(Player);
 
             return RedirectToPage("./Index");
         }

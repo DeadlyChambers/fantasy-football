@@ -8,8 +8,8 @@ namespace SCC.FantasyFootball.Pages.Teams
 {
     public class EditModel : PageModel
     {
-        private readonly ITeamsManager _teamsManager;
-        public EditModel(ITeamsManager teamsManager)
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
+        public EditModel(IEntitiesManager<TeamDto> teamsManager)
         {
             _teamsManager = teamsManager;
         }

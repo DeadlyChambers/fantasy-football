@@ -1,36 +1,33 @@
 ﻿using SCC.FantasyFootball.Common.Enums;
+using SCC.FantasyFootball.DTO.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SCC.FantasyFootball.DTO
 {
-    public record TeamDto 
+    public record TeamDto  : IEntityRecord
     {
-        public int Teamid { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         [EnumDataType(typeof(TeamConferences))]
         public TeamConferences Conference { get; set; }
         [EnumDataType(typeof(TeamDivisions))]
         public TeamDivisions Division { get; set; }
         public string Location { get; set; }
-        public DateTime Createddate { get; set; }
-        public DateTime? Modifieddate { get; set; }
         public IList<GameDto> GameAwayteams { get; set; }
         public IList<GameDto> GameHometeams { get; set; }
         public IList<StatDto> Stats { get; set; }
-    }
-
-    public static class TeamRecordExtensions
-    {
-        public static bool IsDirty(this TeamDto updatedDto, TeamDto originalDto)
+        public DateTime Createddate { get; set; }
+        public DateTime? Modifieddate { get; set; }
+        public bool IsDirty(object obj)
         {
-            return !updatedDto.Teamid.Equals(originalDto.Teamid) ||
-                !updatedDto.Name.Equals(originalDto.Name) ||
-                !updatedDto.Conference.Equals(originalDto.Conference) ||
-                !updatedDto.Division.Equals(originalDto.Division) ||
-                !updatedDto.Location.Equals(originalDto.Location);
+            var original = (obj as TeamDto);
+            return !this.Id.Equals(original.Id) ||
+                !this.Name.Equals(original.Name) ||
+                !this.Conference.Equals(original.Conference) ||
+                !this.Division.Equals(original.Division) ||
+                !this.Location.Equals(original.Location);
         }
     }
-
 }

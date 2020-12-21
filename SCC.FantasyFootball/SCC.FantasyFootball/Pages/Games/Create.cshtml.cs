@@ -1,32 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.Common.Utilities;
+using SCC.FantasyFootball.DTO;
+using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Games
 {
     public class CreateModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
+        private readonly IEntitiesManager<GameDto> _entitiesManager;
+        private readonly IEntitiesManager<TeamDto> _teamEntitiesManager;
 
-        public CreateModel(SCC.FantasyFootball.DataAccess.FootballContext context)
+        public CreateModel(IEntitiesManager<GameDto> entitiesManager, IEntitiesManager<TeamDto> teamEntitiesManager)
         {
-            _context = context;
+            _entitiesManager = entitiesManager;
+            _teamEntitiesManager = teamEntitiesManager;
         }
 
-        public IActionResult OnGet()
+
+        public async Task<IActionResult> OnGet()
         {
-        ViewData["Awayteamid"] = new SelectList(_context.Teams, "Teamid", "Name");
-        ViewData["Hometeamid"] = new SelectList(_context.Teams, "Teamid", "Name");
+            var pagedREquest = new PagedList<TeamDto>
+            {
+                PageSize = 20
+            };
+            var aways = await _teamEntitiesManager.GetPageAsync(pagedREquest);
+            ViewData["Awayteamid"] = new SelectList(aways.Items, "Id", "Name");
+            ViewData["Hometeamid"] = new SelectList(aways.Items, "Id", "Name");
             return Page();
         }
 
         [BindProperty]
-        public Game Game { get; set; }
+        public GameDto Game { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -35,9 +42,7 @@ namespace SCC.FantasyFootball.Pages.Games
             {
                 return Page();
             }
-            Game.Createddate = DateTime.Now;
-            _context.Games.Add(Game);
-            await _context.SaveChangesAsync();
+            Game = await _entitiesManager.AddAsync(Game);
 
             return RedirectToPage("./Index");
         }

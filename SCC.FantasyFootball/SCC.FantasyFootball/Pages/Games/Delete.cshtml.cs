@@ -5,21 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DTO;
 
 namespace SCC.FantasyFootball.Pages.Games
 {
     public class DeleteModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
+        private readonly IEntitiesManager<GameDto> _entitiesManager;
 
-        public DeleteModel(SCC.FantasyFootball.DataAccess.FootballContext context)
+        public DeleteModel(IEntitiesManager<GameDto> entitiesManager)
         {
-            _context = context;
+            _entitiesManager = entitiesManager;
         }
 
+
         [BindProperty]
-        public Game Game { get; set; }
+        public GameDto Game { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +31,7 @@ namespace SCC.FantasyFootball.Pages.Games
                 return NotFound();
             }
 
-            Game = await _context.Games
-                .Include(g => g.Awayteam)
-                .Include(g => g.Hometeam).FirstOrDefaultAsync(m => m.Gameid == id);
+            Game = await _entitiesManager.GetOrDefaultAsync(id.Value);
 
             if (Game == null)
             {
@@ -46,13 +47,7 @@ namespace SCC.FantasyFootball.Pages.Games
                 return NotFound();
             }
 
-            Game = await _context.Games.FindAsync(id);
-
-            if (Game != null)
-            {
-                _context.Games.Remove(Game);
-                await _context.SaveChangesAsync();
-            }
+            await _entitiesManager.DeleteAsync(id.Value);
 
             return RedirectToPage("./Index");
         }

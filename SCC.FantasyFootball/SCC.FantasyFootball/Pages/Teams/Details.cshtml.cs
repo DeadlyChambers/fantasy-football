@@ -8,9 +8,9 @@ namespace SCC.FantasyFootball.Pages.Teams
 {
     public class DetailsModel : PageModel
     {
-        private readonly ITeamsManager _teamsManager;
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
 
-        public DetailsModel(ITeamsManager teamsManager)
+        public DetailsModel(IEntitiesManager<TeamDto> teamsManager)
         {
             _teamsManager = teamsManager;
         }

@@ -1,31 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.Common.Utilities;
+using SCC.FantasyFootball.DTO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.DataAccess;
+
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
     public class IndexModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
+        private readonly IMultiEntitiesManager<StatDto> _statManager;
 
-        public IndexModel(SCC.FantasyFootball.DataAccess.FootballContext context)
+        public IndexModel(IMultiEntitiesManager<StatDto> sm)
         {
-            _context = context;
+            _statManager = sm;
         }
 
-        public IList<Stat> Stat { get;set; }
 
-        public async Task OnGetAsync()
+        public PagedList<StatDto> PagedRecords { get; set; }
+
+
+        public async Task OnGetAsync(int? pageIndex)
         {
-            Stat = await _context.Stats
-                .Include(s => s.Game)
-                .Include(s => s.Player)
-                .Include(s => s.Team).ToListAsync();
+            if (PagedRecords == null)
+                PagedRecords =  new PagedList<StatDto>();
+            if (pageIndex.HasValue)
+                PagedRecords.CurrentPage = pageIndex.Value;
+            PagedRecords = await _statManager.GetPageAsync(PagedRecords);
         }
     }
 }

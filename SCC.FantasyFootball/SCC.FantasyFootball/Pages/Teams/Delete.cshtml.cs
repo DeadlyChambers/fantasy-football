@@ -14,9 +14,9 @@ namespace SCC.FantasyFootball.Pages.Teams
 {
     public class DeleteModel : PageModel
     {
-        private readonly ITeamsManager _teamsManager;
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
 
-        public DeleteModel(ITeamsManager teamsManager)
+        public DeleteModel(IEntitiesManager<TeamDto> teamsManager)
         {
             _teamsManager = teamsManager;
         }

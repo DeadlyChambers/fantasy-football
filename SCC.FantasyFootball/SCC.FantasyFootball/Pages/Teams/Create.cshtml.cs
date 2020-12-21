@@ -14,9 +14,9 @@ namespace SCC.FantasyFootball.Pages.Teams
 {
     public class CreateModel : PageModel
     {
-        private readonly ITeamsManager _teamsManager;
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
 
-        public CreateModel(ITeamsManager teamsManager)
+        public CreateModel(IEntitiesManager<TeamDto> teamsManager)
         {
             _teamsManager = teamsManager;
         }

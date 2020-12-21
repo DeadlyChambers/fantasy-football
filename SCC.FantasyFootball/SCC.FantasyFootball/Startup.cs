@@ -1,18 +1,15 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.DTO.Profiles;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball
 {
@@ -76,7 +73,10 @@ namespace SCC.FantasyFootball
         /// <param name="services"></param>
         private void ConfigureDI(IServiceCollection services)
         {
-            services.AddTransient<ITeamsManager, TeamsManager>();
+            services.AddTransient<IEntitiesManager<TeamDto>, BasicEntitiesManager<TeamDto>>();
+            services.AddTransient<IEntitiesManager<PlayerDto>, BasicEntitiesManager<PlayerDto>>();
+            services.AddTransient<IEntitiesManager<GameDto>, BasicEntitiesManager<GameDto>>();
+            services.AddTransient<IMultiEntitiesManager<StatDto>, StatsManager<StatDto>>();
         }
     }
 }

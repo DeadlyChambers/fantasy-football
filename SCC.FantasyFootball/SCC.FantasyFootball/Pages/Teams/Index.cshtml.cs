@@ -8,8 +8,8 @@ namespace SCC.FantasyFootball.Pages.Teams
 {
     public class IndexModel : PageModel
     {
-        private readonly ITeamsManager _teamsManager;
-        public IndexModel(ITeamsManager teamsManager)
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
+        public IndexModel(IEntitiesManager<TeamDto> teamsManager)
         {
             _teamsManager = teamsManager;
         }
