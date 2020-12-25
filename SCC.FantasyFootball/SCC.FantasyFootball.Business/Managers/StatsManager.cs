@@ -43,7 +43,11 @@ namespace SCC.FantasyFootball.Business.Managers
 
         public async Task<T> GetOrDefaultAsync(int gameId, int teamId, int playerId)
         {
-            var record = await _context.Stats.FindAsync(gameId, teamId, playerId);
+            var record = await _context.Stats.
+                Include(t => t.Team)
+                .Include(p => p.Player)
+                .Include(g => g.Game)
+                .FirstOrDefaultAsync(s => s.Gameid == gameId && s.Teamid == teamId && s.Playerid == playerId);
             if (record == null)
                 return default(T);
             return _mapper.Map<T>(record);

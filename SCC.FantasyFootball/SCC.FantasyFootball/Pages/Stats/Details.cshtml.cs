@@ -29,7 +29,7 @@ namespace SCC.FantasyFootball.Pages.Stats
         {
 
             ///Really all three of these have to be populated
-            if (gid == null)
+            if (gid == null || tid == null || pid == null)
             {
                 return NotFound();
             }

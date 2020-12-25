@@ -27,7 +27,7 @@ namespace SCC.FantasyFootball.Pages.Stats
         public async Task<IActionResult> OnGetAsync(int? gid, int? tid, int? pid)
         {
             ///Really all three of these have to be populated
-            if (gid == null)
+            if (gid == null || tid == null || pid == null)
             {
                 return NotFound();
             }

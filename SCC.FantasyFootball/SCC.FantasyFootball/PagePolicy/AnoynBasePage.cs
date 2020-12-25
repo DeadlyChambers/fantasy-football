@@ -13,6 +13,7 @@ namespace SCC.FantasyFootball.PagePolicy
         public bool IsEditor { get; set; }      
     }
 
+    [AllowAnonymous]
 
     public class AnoynBase : PolicyBase
     {

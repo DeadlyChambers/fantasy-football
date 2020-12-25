@@ -33,7 +33,7 @@ namespace SCC.FantasyFootball.DTO
 
         public KeyValuePair<string, string> AsKeyValuePair()
         {
-            return new KeyValuePair<string, string>(Id.ToString(), $"{Lastname}, {Firstname} {Positions}");
+            return new KeyValuePair<string, string>(Id.ToString(), this.ToString());
         }
 
         public bool IsDirty(object obj)
@@ -45,5 +45,15 @@ namespace SCC.FantasyFootball.DTO
             var current = this with { Stats = null, Createddate = DateTime.MinValue, Modifieddate = null };
             return original != current;
         }
+
+        /// <summary>
+        /// Lastname, Firstname Position
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Lastname}, {Firstname} {Positions}";
+        }
+
     }
 }

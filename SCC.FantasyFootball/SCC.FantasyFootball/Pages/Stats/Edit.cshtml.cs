@@ -6,43 +6,40 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.PagePolicy;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
     public class EditModel : UpdateBasePage
     {
-        //TODO get rid of the context reference
-        private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
+        private readonly IMultiEntitiesManager<StatDto> _statManager;
 
-        public EditModel(SCC.FantasyFootball.DataAccess.FootballContext context)
+        public EditModel(IMultiEntitiesManager<StatDto> sm)
         {
-            _context = context;
+            _statManager = sm;
         }
 
         [BindProperty]
-        public Stat Stat { get; set; }
+        public StatDto Stat { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? gameId, int? teamId, int? playerId)
         {
-            if (id == null)
+            if (gameId == null || teamId == null || playerId == null)
             {
                 return NotFound();
             }
 
-            Stat = await _context.Stats
-                .Include(s => s.Game)
-                .Include(s => s.Player)
-                .Include(s => s.Team).FirstOrDefaultAsync(m => m.Gameid == id);
-
+            Stat = await _statManager.GetOrDefaultAsync(gameId.Value, teamId.Value, playerId.Value);
             if (Stat == null)
             {
                 return NotFound();
             }
-           ViewData["Gameid"] = new SelectList(_context.Games, "Gameid", "Gameid");
-           ViewData["Playerid"] = new SelectList(_context.Players, "Playerid", "Firstname");
-           ViewData["Teamid"] = new SelectList(_context.Teams, "Teamid", "Conference");
+            ViewData["Gameid"] = new SelectList(new List<KeyValuePair<string, string>>{ Stat.Game.AsKeyValuePair() }, "key", "value");
+            ViewData["Playerid"] = new SelectList(new List<KeyValuePair<string, string>>{ Stat.Player.AsKeyValuePair() }, "key", "value");
+            ViewData["Teamid"] = new SelectList(new List<KeyValuePair<string, string>>{ Stat.Team.AsKeyValuePair() }, "key", "value");
             return Page();
         }
 
@@ -55,30 +52,13 @@ namespace SCC.FantasyFootball.Pages.Stats
                 return Page();
             }
 
-            _context.Attach(Stat).State = EntityState.Modified;
-
-            try
+            var stat = await _statManager.UpdateAsync(Stat);
+            if (stat == null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StatExists(Stat.Gameid))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool StatExists(int id)
-        {
-            return _context.Stats.Any(e => e.Gameid == id);
         }
     }
 }

@@ -3,13 +3,18 @@
 
 @{
     ViewData["Title"] = "Index";
+    Model.IsCreator = User.IsInRole(SCC.FantasyFootball.Areas.Identity.Data.SCCRoleConst.Contributor);
+    Model.IsEditor = User.IsInRole(SCC.FantasyFootball.Areas.Identity.Data.SCCRoleConst.Admin);
+    var isAuthed = User.Identity.IsAuthenticated;
 }
-
 <h1>Index</h1>
 
+@if (Model.IsCreator)
+{
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -171,9 +176,19 @@
                     @Html.DisplayFor(modelItem => item.Team.Conference)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @if (Model.IsEditor)
+                    {
+                        <span> @Html.ActionLink("Edit", "Edit", new { gameId = item.Gameid, playerId = item.Playerid, teamId = item.Teamid }) | </span>
+                    }
+                    @if (isAuthed)
+                    {
+                <span>  @Html.ActionLink("Details", "Details", new { gameId = item.Gameid, playerId = item.Playerid, teamId = item.Teamid })</span>
+                    }
+                  
+                    @if (Model.IsEditor)
+                    {
+                        <span> | @Html.ActionLink("Delete", "Delete", new { gameId = item.Gameid, playerId = item.Playerid, teamId = item.Teamid })</span>
+                    }
                 </td>
             </tr>
         }

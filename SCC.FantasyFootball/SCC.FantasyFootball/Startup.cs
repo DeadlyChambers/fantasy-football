@@ -1,19 +1,18 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SCC.FantasyFootball.Areas.Identity.Data;
 using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.Data;
 using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.DTO.Profiles;
 using System;
-using SCC.FantasyFootball.Areas.Identity.Data;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SCC.FantasyFootball
 {
@@ -29,10 +28,8 @@ namespace SCC.FantasyFootball
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthorization(options =>
-            {
-                SCCPolicies.AddOveralPolicies(options);
-            });
+          
+            services.AddAuthorization();
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
                 SCCPolicies.AddPageSpecificAuth(options);
@@ -72,9 +69,9 @@ namespace SCC.FantasyFootball
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+          
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

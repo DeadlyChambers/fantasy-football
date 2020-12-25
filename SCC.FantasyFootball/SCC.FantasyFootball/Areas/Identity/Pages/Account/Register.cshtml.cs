@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SCC.FantasyFootball.Areas.Identity.Data;
 
 namespace SCC.FantasyFootball.Areas.Identity.Pages.Account
@@ -24,18 +25,18 @@ namespace SCC.FantasyFootball.Areas.Identity.Pages.Account
         private readonly SignInManager<SCCUser> _signInManager;
         private readonly UserManager<SCCUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        RoleManager<IdentityRole> _roleManager;
+     //   RoleManager<IdentityRole> _roleManager;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<SCCUser> userManager,
-            RoleManager<IdentityRole> roleManager,
+     //       RoleManager<IdentityRole> roleManager,
             SignInManager<SCCUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
+            // _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -93,33 +94,31 @@ namespace SCC.FantasyFootball.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var createdUserRole = SCCRoles.Reader;
+                var rolesToAdd = new List<string> { SCCRoles.Reader.ToString() };
                 if (Input.Email.Equals("shanechambers85@gmail.com", StringComparison.OrdinalIgnoreCase))
-                    createdUserRole = SCCRoles.Admin;
-                else if (Input.Email.Contains("85"))
-                    createdUserRole = SCCRoles.Contributor;
-                //await CreateRole(createdUserRole);
+                   rolesToAdd.Add( SCCRoles.Admin.ToString());
+                if (Input.Email.Contains("85"))
+                    rolesToAdd.Add( SCCRoles.Contributor.ToString());
                 var user = new SCCUser { UserName = Input.Email, Email = Input.Email, EmailConfirmed = true };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    var roleresult = await _userManager.AddToRoleAsync(user, createdUserRole.ToString());
-                    if (roleresult.Succeeded)
+                    var roleresult = await _userManager.AddToRolesAsync(user, rolesToAdd);
                     {
-                        _logger.LogDebug($"Added user role of {createdUserRole} on registration");
+                        _logger.LogDebug($"Added user roles of {string.Join(",",rolesToAdd)} on registration");
                     }
-                    var creationClaims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, user.UserName),
-                        new Claim(ClaimTypes.Role, createdUserRole.ToString()),
-                        new Claim(ClaimTypes.Email, user.UserName)
-                    };
-                    var claims = await _userManager.AddClaimsAsync(user, creationClaims);
-                    if (claims.Succeeded)
-                    {
-                        _logger.LogDebug($"Added claims for {user.UserName} on registration");
-                    }
+                    //var creationClaims = new List<Claim>
+                    //{
+                    //    new Claim(ClaimTypes.Name, user.UserName),
+                    //    new Claim(ClaimTypes.Role, createdUserRole.ToString()),
+                    //    new Claim(ClaimTypes.Email, user.UserName)
+                    //};
+                    //var claims = await _userManager.AddClaimsAsync(user, creationClaims);
+                    //if (claims.Succeeded)
+                    //{
+                    //    _logger.LogDebug($"Added claims for {user.UserName} on registration");
+                    //}
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     //var callbackUrl = Url.Page(
@@ -131,15 +130,19 @@ namespace SCC.FantasyFootball.Areas.Identity.Pages.Account
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    //{
-                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    //}
-                    //else
-                    //{
+
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    {   
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var confirm = await _userManager.ConfirmEmailAsync(user, code);
+
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    }
+                    else
+                    {
                         await _signInManager.SignInAsync(user, isPersistent: true);
                         return LocalRedirect(returnUrl);
-                    //}
+                    }
                 }
                
                 foreach (var error in result.Errors)

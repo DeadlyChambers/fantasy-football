@@ -28,6 +28,16 @@ namespace SCC.FantasyFootball.Areas.Identity.Data
         Reader = 3
     }
 
+    public static class SCCRoleConst
+    {
+        public const string Anoynomous = "Anoynomous";
+        public const string Admin = "Admin";
+        public const string CreateRoles = "Admin,Contributor";
+        public const string Contributor = "Contributor";
+        public const string ReadRoles = "Admin,Contributor,Reader";
+        public const string Reader = "Reader";
+    }
+
     public static class SCCRoleExtensions
     {
         /// <summary>

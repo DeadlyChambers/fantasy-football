@@ -7,7 +7,7 @@ namespace SCC.FantasyFootball.PagePolicy
     /// <summary>
     /// Any page that requires a login at the minimum
     /// </summary>
-    [Authorize(Policy = SCCPolicies.Updaters)]
+    [Authorize(Roles = SCCRoleConst.Admin)]
     public class UpdateBasePage : PageModel
     {
     }

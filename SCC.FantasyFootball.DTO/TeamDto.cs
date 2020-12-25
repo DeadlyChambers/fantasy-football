@@ -23,7 +23,7 @@ namespace SCC.FantasyFootball.DTO
 
         public KeyValuePair<string, string> AsKeyValuePair()
         {
-            return new KeyValuePair<string, string>(Id.ToString(), $"{Location} {Name}");
+            return new KeyValuePair<string, string>(Id.ToString(), this.ToString());
         }
 
         public bool IsDirty(object obj)
@@ -34,6 +34,15 @@ namespace SCC.FantasyFootball.DTO
                 !this.Conference.Equals(original.Conference) ||
                 !this.Division.Equals(original.Division) ||
                 !this.Location.Equals(original.Location);
+        }
+
+        /// <summary>
+        /// Location Name
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Location} {Name}";
         }
     }
 }

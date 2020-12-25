@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
+
     public class IndexModel : ViewBasePage
     {
         private readonly IMultiEntitiesManager<StatDto> _statManager;

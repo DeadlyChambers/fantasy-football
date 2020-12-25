@@ -22,7 +22,7 @@ namespace SCC.FantasyFootball.DTO
 
         public KeyValuePair<string, string> AsKeyValuePair()
         {
-            return new KeyValuePair<string, string>(Id.ToString(), $"{Hometeam.Name} vs {Awayteam.Name} {Gamedate.Year}");
+            return new KeyValuePair<string, string>(Id.ToString(), this.ToString());
         }
 
         public bool IsDirty(object obj)
@@ -31,6 +31,15 @@ namespace SCC.FantasyFootball.DTO
             var updated = this with { Stats = original.Stats, Createddate = original.Createddate, Modifieddate = original.Modifieddate, Awayteam = original.Awayteam, Hometeam = original.Hometeam };
             
             return original != updated;
+        }
+
+        /// <summary>
+        /// Home Team vs AwayTeam Year
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Hometeam.Name} vs {Awayteam.Name} {Gamedate.Year}";
         }
     }
 }

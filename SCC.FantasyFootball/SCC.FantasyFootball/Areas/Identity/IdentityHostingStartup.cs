@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SCC.FantasyFootball.Areas.Identity.Data;
 using SCC.FantasyFootball.Data;
@@ -20,15 +17,17 @@ namespace SCC.FantasyFootball.Areas.Identity
                     options.UseNpgsql(
                         context.Configuration["ConnectionStrings:sccContext"]));
 
-                services.AddDefaultIdentity<SCCUser>(options => 
-                { options.SignIn.RequireConfirmedAccount = false;
-                    options.Password.RequireDigit = false; 
-                    options.Password.RequireLowercase = false; 
-                    options.Password.RequireNonAlphanumeric = false; })
-                .AddRoles<IdentityRole>()
+                services.AddIdentity<SCCUser, IdentityRole>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                }).AddDefaultTokenProviders()
                 .AddDefaultUI()
-                .AddDefaultTokenProviders()
-                    .AddEntityFrameworkStores<IdentityContext>();
+                .AddEntityFrameworkStores<IdentityContext>();
+
+                //services.AddDefaultIdentity<SCCUser>();
             });
         }
     }
