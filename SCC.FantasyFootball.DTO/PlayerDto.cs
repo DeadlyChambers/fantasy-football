@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.DTO
 {
-    public record PlayerDto : IEntityRecord
+    public record PlayerDto : IEntityRecord, ISelectAsItem
     {
         public int Id { get; set; }
         public string Firstname { get; set; }
@@ -30,6 +30,12 @@ namespace SCC.FantasyFootball.DTO
         public PlayerGameStatus PlayingStatus { get; set; }
 
         public IList<StatDto> Stats { get; set; }
+
+        public KeyValuePair<string, string> AsKeyValuePair()
+        {
+            return new KeyValuePair<string, string>(Id.ToString(), $"{Lastname}, {Firstname} {Positions}");
+        }
+
         public bool IsDirty(object obj)
         {
             //SInce I am using records I can project the properties that may in fact be different since they are not being sent back

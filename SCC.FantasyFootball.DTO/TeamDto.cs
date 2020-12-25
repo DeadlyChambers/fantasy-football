@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SCC.FantasyFootball.DTO
 {
-    public record TeamDto  : IEntityRecord
+    public record TeamDto  : IEntityRecord, ISelectAsItem
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,6 +20,12 @@ namespace SCC.FantasyFootball.DTO
         public IList<StatDto> Stats { get; set; }
         public DateTime Createddate { get; set; }
         public DateTime? Modifieddate { get; set; }
+
+        public KeyValuePair<string, string> AsKeyValuePair()
+        {
+            return new KeyValuePair<string, string>(Id.ToString(), $"{Location} {Name}");
+        }
+
         public bool IsDirty(object obj)
         {
             var original = (obj as TeamDto);

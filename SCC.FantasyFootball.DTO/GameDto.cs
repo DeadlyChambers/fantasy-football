@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SCC.FantasyFootball.DTO
 {
-    public record GameDto : IEntityRecord
+    public record GameDto : IEntityRecord, ISelectAsItem
     {
         public int Id { get; set; }
         public int Hometeamid { get; set; }
@@ -19,6 +19,12 @@ namespace SCC.FantasyFootball.DTO
         public IList<StatDto> Stats { get; set; }
         public DateTime Createddate { get; set; }
         public DateTime? Modifieddate { get; set; }
+
+        public KeyValuePair<string, string> AsKeyValuePair()
+        {
+            return new KeyValuePair<string, string>(Id.ToString(), $"{Hometeam.Name} vs {Awayteam.Name} {Gamedate.Year}");
+        }
+
         public bool IsDirty(object obj)
         {
             var original = (obj as GameDto); //Pushing db values into the object that was passed in from api

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DTO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Stats
@@ -38,9 +39,9 @@ namespace SCC.FantasyFootball.Pages.Stats
                 PageSize = 20
             });
             //These Ids might acyually have to map to Stats properies
-            ViewData["Gameid"] = new SelectList(games.Items, "Id", "Gameid");
-        ViewData["Playerid"] = new SelectList(players.Items, "Id", "Firstname");
-        ViewData["Teamid"] = new SelectList(teams.Items, "Id", "Name");
+            ViewData["Gameid"] = new SelectList(games.Items.Select(x => x.AsKeyValuePair()).ToList(), "Key", "Value");
+            ViewData["Playerid"] = new SelectList(players.Items.Select(x => x.AsKeyValuePair()).ToList(), "Key", "Value");
+            ViewData["Teamid"] = new SelectList(teams.Items.Select(x => x.AsKeyValuePair()).ToList(), "Key", "Value");
             return Page();
         }
 
