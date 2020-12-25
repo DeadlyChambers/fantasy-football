@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.DataAccess;
-using SCC.FantasyFootball.Common.Extensions;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.DTO;
+using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
     public class DetailsModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
 
-        public DetailsModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public DetailsModel(IEntitiesManager<TeamDto> teamsManager)
         {
-            _context = context;
+            _teamsManager = teamsManager;
         }
 
-        public Team Team { get; set; }
+        public TeamDto Team { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,7 +24,7 @@ namespace SCC.FantasyFootball.Pages.Teams
                 return NotFound();
             }
 
-            Team = await _context.Teams.FirstOrDefaultAsync(m => m.Teamid == id);
+            Team = await _teamsManager.GetOrDefaultAsync(id.Value);
 
             if (Team == null)
             {

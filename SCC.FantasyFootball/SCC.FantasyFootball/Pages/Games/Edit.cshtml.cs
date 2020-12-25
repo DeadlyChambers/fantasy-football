@@ -1,44 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.Common.Utilities;
+using SCC.FantasyFootball.DTO;
+using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Games
 {
     public class EditModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly IEntitiesManager<GameDto> _entitiesManager;
+        private readonly IEntitiesManager<TeamDto> _teamEntitiesManager;
 
-        public EditModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public EditModel(IEntitiesManager<GameDto> entitiesManager, IEntitiesManager<TeamDto> teamEntitiesManager)
         {
-            _context = context;
+            _entitiesManager = entitiesManager;
+            _teamEntitiesManager = teamEntitiesManager;
         }
 
+
         [BindProperty]
-        public Game Game { get; set; }
+        public GameDto Game { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            Game = await _context.Games
-                .Include(g => g.Awayteam)
-                .Include(g => g.Hometeam).FirstOrDefaultAsync(m => m.Gameid == id);
+            Game =await _entitiesManager.GetOrDefaultAsync(id.Value);
 
             if (Game == null)
             {
                 return NotFound();
             }
-           ViewData["Awayteamid"] = new SelectList(_context.Teams, "Teamid", "Conference");
-           ViewData["Hometeamid"] = new SelectList(_context.Teams, "Teamid", "Conference");
+            var pagedREquest = new PagedList<TeamDto>
+            {
+                PageSize = 20
+            };
+            var aways = await _teamEntitiesManager.GetPageAsync(pagedREquest);
+           ViewData["Awayteamid"] = new SelectList(aways.Items, "Id", "Name");
+           ViewData["Hometeamid"] = new SelectList(aways.Items, "Id", "Name");
             return Page();
         }
 
@@ -51,31 +55,11 @@ namespace SCC.FantasyFootball.Pages.Games
                 return Page();
             }
 
-            Game.Modifieddate = DateTime.Now;
-            _context.Attach(Game).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!GameExists(Game.Gameid))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var team = await _entitiesManager.UpdateAsync(Game);
+            if (team == null)
+                return NotFound();
 
             return RedirectToPage("./Index");
-        }
-
-        private bool GameExists(int id)
-        {
-            return _context.Games.Any(e => e.Gameid == id);
         }
     }
 }

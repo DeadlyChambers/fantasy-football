@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SCC.FantasyFootball.DTO.Interfaces;
 
 namespace SCC.FantasyFootball.DTO
 {
-    public class StatDto
+    public record StatDto : IMultiEntityRecord
     {
         public int Gameid { get; set; }
         public int Teamid { get; set; }
@@ -14,7 +10,7 @@ namespace SCC.FantasyFootball.DTO
         public short Passingattempts { get; set; }
         public short Passingcompletions { get; set; }
         public short Passingyards { get; set; }
-        public short Passingytds { get; set; }
+        public short Passingtds { get; set; }
         public short Interceptions { get; set; }
         public short Fumbles { get; set; }
         public short Receptions { get; set; }
@@ -33,6 +29,12 @@ namespace SCC.FantasyFootball.DTO
         public short? Rzrush { get; set; }
         public bool Started { get; set; }
         public short Snaps { get; set; }
+        public bool IsDirty(object obj)
+        {
+            var original = (obj as StatDto);
+            var updatedVersion = this with { Game = original.Game, Player = original.Player, Team = original.Team };
+            return !(updatedVersion.Equals(this));
+        }
 
         public GameDto Game { get; set; }
         public PlayerDto Player { get; set; }

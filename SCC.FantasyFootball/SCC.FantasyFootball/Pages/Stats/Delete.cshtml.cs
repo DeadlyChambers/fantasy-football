@@ -4,34 +4,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DTO;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
     public class DeleteModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly IMultiEntitiesManager<StatDto> _statManager;
 
-        public DeleteModel(SCC.FantasyFootball.DataAccess.postgresContext context)
-        {
-            _context = context;
+        public DeleteModel(IMultiEntitiesManager<StatDto> sm)
+        {   _statManager = sm;
         }
 
         [BindProperty]
-        public Stat Stat { get; set; }
+        public StatDto Stat { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? gid, int? tid, int? pid)
         {
-            if (id == null)
+            ///Really all three of these have to be populated
+            if (gid == null)
             {
                 return NotFound();
             }
 
-            Stat = await _context.Stats
-                .Include(s => s.Game)
-                .Include(s => s.Player)
-                .Include(s => s.Team).FirstOrDefaultAsync(m => m.Gameid == id);
+            Stat = await _statManager.GetOrDefaultAsync(gid.Value, tid.Value, pid.Value);
 
             if (Stat == null)
             {
@@ -40,20 +40,16 @@ namespace SCC.FantasyFootball.Pages.Stats
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? gid, int? tid, int? pid)
         {
-            if (id == null)
+
+            ///Really all three of these have to be populated
+            if (gid == null)
             {
                 return NotFound();
             }
 
-            Stat = await _context.Stats.FindAsync(id);
-
-            if (Stat != null)
-            {
-                _context.Stats.Remove(Stat);
-                await _context.SaveChangesAsync();
-            }
+            await _statManager.DeleteAsync(gid.Value, tid.Value, pid.Value);
 
             return RedirectToPage("./Index");
         }

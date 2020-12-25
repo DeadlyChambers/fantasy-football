@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.DTO;
+using System.Threading.Tasks;
+
 
 namespace SCC.FantasyFootball.Pages.Players
 {
     public class EditModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly IEntitiesManager<PlayerDto> _playersManager;
 
-        public EditModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public EditModel(IEntitiesManager<PlayerDto> playersManager)
         {
-            _context = context;
+            _playersManager = playersManager;
         }
 
         [BindProperty]
-        public Player Player { get; set; }
+        public PlayerDto Player { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +26,7 @@ namespace SCC.FantasyFootball.Pages.Players
                 return NotFound();
             }
 
-            Player = await _context.Players.FirstOrDefaultAsync(m => m.Playerid == id);
+            Player = await _playersManager.GetOrDefaultAsync(id.Value);
 
             if (Player == null)
             {
@@ -46,31 +43,12 @@ namespace SCC.FantasyFootball.Pages.Players
             {
                 return Page();
             }
-            Player.Modifieddate = DateTime.Now;
-            _context.Attach(Player).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PlayerExists(Player.Playerid))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var player = await _playersManager.UpdateAsync(Player);
+            if (player == null)
+                return NotFound();
 
             return RedirectToPage("./Index");
         }
 
-        private bool PlayerExists(int id)
-        {
-            return _context.Players.Any(e => e.Playerid == id);
-        }
     }
 }

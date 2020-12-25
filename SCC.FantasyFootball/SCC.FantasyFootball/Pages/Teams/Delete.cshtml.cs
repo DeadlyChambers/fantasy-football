@@ -5,21 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DTO;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
     public class DeleteModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
 
-        public DeleteModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        public DeleteModel(IEntitiesManager<TeamDto> teamsManager)
         {
-            _context = context;
+            _teamsManager = teamsManager;
         }
 
+
         [BindProperty]
-        public Team Team { get; set; }
+        public TeamDto Team { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,7 +32,7 @@ namespace SCC.FantasyFootball.Pages.Teams
                 return NotFound();
             }
 
-            Team = await _context.Teams.FirstOrDefaultAsync(m => m.Teamid == id);
+            Team = await _teamsManager.GetOrDefaultAsync(id.Value);
 
             if (Team == null)
             {
@@ -44,13 +48,7 @@ namespace SCC.FantasyFootball.Pages.Teams
                 return NotFound();
             }
 
-            Team = await _context.Teams.FindAsync(id);
-
-            if (Team != null)
-            {
-                _context.Teams.Remove(Team);
-                await _context.SaveChangesAsync();
-            }
+            await  _teamsManager.DeleteAsync(id.Value);
 
             return RedirectToPage("./Index");
         }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -7,8 +9,11 @@ namespace SCC.FantasyFootball.DataAccess
 {
     public partial class Stat
     {
+        [Key, Column(Order = 0)]
         public int Gameid { get; set; }
+        [Key, Column(Order = 1)]
         public int Teamid { get; set; }
+        [Key, Column(Order = 2)]
         public int Playerid { get; set; }
         public short Passingattempts { get; set; }
         public short Passingcompletions { get; set; }

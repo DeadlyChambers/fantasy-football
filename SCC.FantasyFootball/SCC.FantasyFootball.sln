@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30615.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball", "SCC.FantasyFootball\SCC.FantasyFootball.csproj", "{31F144CE-14EC-4AD2-B204-84F811B1DB46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball", "SCC.FantasyFootball\SCC.FantasyFootball.csproj", "{31F144CE-14EC-4AD2-B204-84F811B1DB46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball.DataAccess", "SCC.FantasyFootball.DataAccess\SCC.FantasyFootball.DataAccess.csproj", "{C884F346-8C2A-4BFC-A9F0-CC9FDCBB8525}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.DataAccess", "SCC.FantasyFootball.DataAccess\SCC.FantasyFootball.DataAccess.csproj", "{C884F346-8C2A-4BFC-A9F0-CC9FDCBB8525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball.DTO", "..\SCC.FantasyFootball.DTO\SCC.FantasyFootball.DTO.csproj", "{841D0FEE-B124-4A69-8D06-5EB436A590B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.DTO", "..\SCC.FantasyFootball.DTO\SCC.FantasyFootball.DTO.csproj", "{841D0FEE-B124-4A69-8D06-5EB436A590B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D027C78B-7473-4907-BD63-FD55AFC89D5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball.Tests.Unit", "..\SCC.FantasyFootball.Tests.Unit\SCC.FantasyFootball.Tests.Unit.csproj", "{4BB62141-5325-4B94-8DBE-70E5388BB3B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Tests.Unit", "..\SCC.FantasyFootball.Tests.Unit\SCC.FantasyFootball.Tests.Unit.csproj", "{4BB62141-5325-4B94-8DBE-70E5388BB3B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball.Tests.Common", "..\SCC.FantasyFootball.Tests.Common\SCC.FantasyFootball.Tests.Common.csproj", "{4236CD16-95C7-4C25-84D6-040EBB3756FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Tests.Common", "..\SCC.FantasyFootball.Tests.Common\SCC.FantasyFootball.Tests.Common.csproj", "{4236CD16-95C7-4C25-84D6-040EBB3756FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball.Common", "..\SCC.FantasyFootball.Common\SCC.FantasyFootball.Common.csproj", "{8E535A41-4562-4279-A884-C17FAC5766D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Common", "..\SCC.FantasyFootball.Common\SCC.FantasyFootball.Common.csproj", "{8E535A41-4562-4279-A884-C17FAC5766D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball.Business", "SCC.FantasyFootball.Business\SCC.FantasyFootball.Business.csproj", "{A220DBB1-F3F7-4243-876D-84537A5D5D31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{8E535A41-4562-4279-A884-C17FAC5766D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E535A41-4562-4279-A884-C17FAC5766D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E535A41-4562-4279-A884-C17FAC5766D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

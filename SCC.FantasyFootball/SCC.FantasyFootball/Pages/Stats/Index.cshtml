@@ -14,167 +14,208 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Passingattempts)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Passingattempts)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Passingcompletions)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Passingcompletions)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Passingyards)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Passingyards)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Passingtds)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Passingtds)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Interceptions)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Interceptions)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Fumbles)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Fumbles)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Receptions)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Receptions)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Targets)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Targets)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Drops)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Drops)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Receivingyards)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Receivingyards)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Receivingtds)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Receivingtds)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Rushingattempts)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Rushingattempts)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Rushingyards)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Rushingyards)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Rushingtds)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Rushingtds)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Otheryards)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Otheryards)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Othertds)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Othertds)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Twopointconversion)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Twopointconversion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Points)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Points)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Rztarget)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Rztarget)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Rzrush)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Rzrush)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Started)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Started)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Snaps)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Snaps)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Game)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Game)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Player)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Player)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stat[0].Team)
+                @Html.DisplayNameFor(model => model.PagedRecords.Items[0].Team)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Stat) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passingattempts)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passingcompletions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passingyards)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passingtds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Interceptions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fumbles)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Receptions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Targets)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drops)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Receivingyards)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Receivingtds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rushingattempts)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rushingyards)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rushingtds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Otheryards)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Othertds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Twopointconversion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Points)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rztarget)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rzrush)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Started)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Snaps)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Game.Gameid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Team.Conference)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.PagedRecords.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passingattempts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passingcompletions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passingyards)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passingtds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Interceptions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fumbles)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Receptions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Targets)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Drops)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Receivingyards)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Receivingtds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rushingattempts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rushingyards)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rushingtds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Otheryards)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Othertds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Twopointconversion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rztarget)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rzrush)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Started)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Snaps)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Game.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.Conference)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@{
+    var prevDisabled = !Model.PagedRecords.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.PagedRecords.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.PagedRecords.CurrentPage - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.PagedRecords.CurrentPage  + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
+<dl class="row">
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.PageSize)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.PageSize)
+    </dd>
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.CurrentPage)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.CurrentPage)
+    </dd>
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.TotalPages)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.TotalPages)
+    </dd>
+    <dt class="col-sm-2 text-sm-left">
+        @Html.DisplayNameFor(model => model.PagedRecords.TotalRecords)
+    </dt>
+    <dd class="col-sm-2 text-sm-left">
+        @Html.DisplayFor(model => model.PagedRecords.TotalRecords)
+    </dd>

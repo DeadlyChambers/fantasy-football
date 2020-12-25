@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.Business.Managers;
+using SCC.FantasyFootball.DTO;
+using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
     public class EditModel : PageModel
     {
-        private readonly SCC.FantasyFootball.DataAccess.postgresContext _context;
-
-        public EditModel(SCC.FantasyFootball.DataAccess.postgresContext context)
+        private readonly IEntitiesManager<TeamDto> _teamsManager;
+        public EditModel(IEntitiesManager<TeamDto> teamsManager)
         {
-            _context = context;
+            _teamsManager = teamsManager;
         }
 
+
         [BindProperty]
-        public Team Team { get; set; }
+        public TeamDto Team { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +25,7 @@ namespace SCC.FantasyFootball.Pages.Teams
                 return NotFound();
             }
 
-            Team = await _context.Teams.FirstOrDefaultAsync(m => m.Teamid == id);
+            Team = await _teamsManager.GetOrDefaultAsync(id.Value);
 
             if (Team == null)
             {
@@ -46,32 +42,11 @@ namespace SCC.FantasyFootball.Pages.Teams
             {
                 return Page();
             }
-            Team.Modifieddate = DateTime.Now;
-                 
-            _context.Attach(Team).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TeamExists(Team.Teamid))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            var team = await _teamsManager.UpdateAsync(Team);
+            if (team == null)
+                return NotFound();
             return RedirectToPage("./Index");
-        }
-
-        private bool TeamExists(int id)
-        {
-            return _context.Teams.Any(e => e.Teamid == id);
         }
     }
 }

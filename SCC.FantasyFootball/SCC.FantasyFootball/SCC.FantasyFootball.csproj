@@ -23,11 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SCC.FantasyFootball.DTO\SCC.FantasyFootball.DTO.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\SCC.FantasyFootball.Business\SCC.FantasyFootball.Business.csproj" />
   </ItemGroup>
 
 </Project>
