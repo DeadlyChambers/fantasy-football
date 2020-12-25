@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SCC.FantasyFootball.Areas.Identity.Data;
 using SCC.FantasyFootball.Data;
@@ -20,12 +23,13 @@ namespace SCC.FantasyFootball.Areas.Identity
                 services.AddIdentity<SCCUser, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = true;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
+                    options.Password.RequireDigit = false; 
+                    options.Password.RequireLowercase = false; 
                     options.Password.RequireNonAlphanumeric = false;
                 }).AddDefaultTokenProviders()
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<IdentityContext>();
+                .AddDefaultTokenProviders()
+                    .AddEntityFrameworkStores<IdentityContext>();
 
                 //services.AddDefaultIdentity<SCCUser>();
             });

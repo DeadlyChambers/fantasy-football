@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,8 @@ using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.DTO.Profiles;
 using System;
+using SCC.FantasyFootball.Areas.Identity.Data;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SCC.FantasyFootball
 {

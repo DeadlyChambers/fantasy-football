@@ -96,9 +96,6 @@ namespace SCC.FantasyFootball.Areas.Identity.Pages.Account
             {
                 var rolesToAdd = new List<string> { SCCRoles.Reader.ToString() };
                 if (Input.Email.Equals("shanechambers85@gmail.com", StringComparison.OrdinalIgnoreCase))
-                   rolesToAdd.Add( SCCRoles.Admin.ToString());
-                if (Input.Email.Contains("85"))
-                    rolesToAdd.Add( SCCRoles.Contributor.ToString());
                 var user = new SCCUser { UserName = Input.Email, Email = Input.Email, EmailConfirmed = true };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
