@@ -8,12 +8,10 @@ namespace SCC.FantasyFootball.Pages.Teams
 {
     public class IndexModel : AnoynBase
     {
-        private readonly IAuthorizationService _auth;
         private readonly IEntitiesManager<TeamDto> _teamsManager;
-        public IndexModel(IEntitiesManager<TeamDto> teamsManager, IAuthorizationService auth)
+        public IndexModel(IEntitiesManager<TeamDto> teamsManager)
         {
             _teamsManager = teamsManager;
-            _auth = auth;
         }
 
 
@@ -21,8 +19,6 @@ namespace SCC.FantasyFootball.Pages.Teams
 
         public async Task OnGetAsync(int? pageIndex)
         {
-            //IsCreator = _auth.AuthorizeAsync(User, SCCPolicies.Creators).Result.Succeeded;
-            //IsEditor = _auth.AuthorizeAsync(User, SCCPolicies.Updaters).Result.Succeeded;
             if (PagedRecords == null)
                 PagedRecords = new PagedList<TeamDto>();
             if (pageIndex.HasValue)

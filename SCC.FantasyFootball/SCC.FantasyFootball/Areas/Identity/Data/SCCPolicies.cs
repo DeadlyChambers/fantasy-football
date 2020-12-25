@@ -17,16 +17,7 @@ namespace SCC.FantasyFootball.Areas.Identity.Data
         public const string Creators = "Creators";
         public const string Updaters = "Updaters";
 
-        /// <summary>
-        /// Create various Policies that can be used for Auth on the site
-        /// </summary>
-        /// <param name="options"></param>
-        public static void AddOveralPolicies(AuthorizationOptions options)
-        {
-            options.AddPolicy(SCCPolicies.Readers, policy => policy.RequireRole(SCCRoles.Admin.ToString(), SCCRoles.Contributor.ToString(), SCCRoles.Reader.ToString()));
-            options.AddPolicy(SCCPolicies.Creators, policy => policy.RequireRole(SCCRoles.Admin.ToString(), SCCRoles.Contributor.ToString()));
-            options.AddPolicy(SCCPolicies.Updaters, policy => policy.RequireRole(SCCRoles.Admin.ToString()));
-        }
+        
 
 
         /// <summary>
@@ -45,7 +36,6 @@ namespace SCC.FantasyFootball.Areas.Identity.Data
             //Anonymous can view all indexes
             //options.Conventions.AllowAnonymousToPage("~/Index");
             //Execpt stats
-            options.Conventions.AuthorizePage("/Stats/Index", SCCPolicies.Readers);
 
             options.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/AccessDenied");
         }
