@@ -1,7 +1,7 @@
 ﻿dotnet restore
 #cd possibly
 #dir possibly
-dotnet ef dbcontext scaffold "Host=localhost;Database=postgres;Username=postgres;Password=Snowboard1" Npgsql.EntityFrameworkCore.PostgreSQL -o SCC.FantasyFootball.DataAccess
+dotnet ef dbcontext scaffold "Host=localhost;Database=postgres;Username=postgres;Password={password}" Npgsql.EntityFrameworkCore.PostgreSQL -o SCC.FantasyFootball.DataAccess
 
 
 #Identity create migration, then udpate db
