@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
-    public class CreateModel : PageModel
+    public class CreateModel : CreateBasePage
     {
         private readonly IEntitiesManager<PlayerDto> _playerManager;
         private readonly IEntitiesManager<GameDto> _gameManager;

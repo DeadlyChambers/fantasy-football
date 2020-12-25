@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Players
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : UpdateBasePage
     {
         private readonly IEntitiesManager<PlayerDto> _playersManager;
 

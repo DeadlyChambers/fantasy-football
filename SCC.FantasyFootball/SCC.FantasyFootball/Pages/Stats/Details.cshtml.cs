@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
-    public class DetailsModel : PageModel
+    
+    public class DetailsModel : ViewBasePage
     {
         private readonly IMultiEntitiesManager<StatDto> _statManager;
 

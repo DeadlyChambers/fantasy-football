@@ -1,13 +1,10 @@
 ﻿@page
 @model SCC.FantasyFootball.Pages.Teams.IndexModel
 
-@{
-    ViewData["Title"] = "Index";
-}
 
 <h1>Index</h1>
 
-<p>
+<p class="@(Model.IsCreator == true ? "show" : "hide")">
     <a asp-page="Create">Create New</a>
 </p>
 
@@ -58,9 +55,11 @@
                     @Html.DisplayFor(modelItem => item.Modifieddate)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+
+                    <a class="@(Model.IsEditor == true ? "show" : "hide")" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+
                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="@(Model.IsEditor == true ? "show" : "hide")" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
@@ -71,8 +70,8 @@
     var nextDisabled = !Model.PagedRecords.HasNextPage ? "disabled" : "";
 }
 
+
 <a asp-page="./Index"
-  
    asp-route-pageIndex="@(Model.PagedRecords.CurrentPage - 1)"
    class="btn btn-primary @prevDisabled">
     Previous

@@ -9,10 +9,11 @@ using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : UpdateBasePage
     {
         private readonly IMultiEntitiesManager<StatDto> _statManager;
 

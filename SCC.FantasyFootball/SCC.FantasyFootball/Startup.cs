@@ -1,15 +1,19 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SCC.FantasyFootball.Areas.Identity.Data;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.DTO.Profiles;
 using System;
+using SCC.FantasyFootball.Areas.Identity.Data;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SCC.FantasyFootball
 {
@@ -25,7 +29,15 @@ namespace SCC.FantasyFootball
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddAuthorization(options =>
+            {
+                SCCPolicies.AddOveralPolicies(options);
+            });
+            services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                SCCPolicies.AddPageSpecificAuth(options);
+            });
+           
 
             services.AddAutoMapper((serviceProvider, autoMapper)=>
             {
@@ -38,7 +50,9 @@ namespace SCC.FantasyFootball
 
             ConfigureDI(services);
         }
-        
+
+       
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

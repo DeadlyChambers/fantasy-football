@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.PagePolicy;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
-    public class EditModel : PageModel
+    public class EditModel : UpdateBasePage
     {
+        //TODO get rid of the context reference
         private readonly SCC.FantasyFootball.DataAccess.FootballContext _context;
 
         public EditModel(SCC.FantasyFootball.DataAccess.FootballContext context)

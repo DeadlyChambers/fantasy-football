@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
-    public class EditModel : PageModel
+    public class EditModel : UpdateBasePage
     {
         private readonly IEntitiesManager<TeamDto> _teamsManager;
         public EditModel(IEntitiesManager<TeamDto> teamsManager)
