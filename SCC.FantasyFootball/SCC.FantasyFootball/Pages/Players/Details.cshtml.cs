@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Players
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : ViewBasePage
     {
         private readonly IEntitiesManager<PlayerDto> _playersManager;
 

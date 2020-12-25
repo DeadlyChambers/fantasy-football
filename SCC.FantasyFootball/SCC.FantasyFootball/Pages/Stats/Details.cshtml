@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    Model.IsEditor = User.IsInRole(SCC.FantasyFootball.Areas.Identity.Data.SCCRoleConst.Admin);
 }
 
 <h1>Details</h1>
@@ -164,6 +165,9 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @if (Model.IsEditor)
+    {
+        <span>@Html.ActionLink("Delete", "Delete", new { gameId = Model.Stat.Gameid, playerId = Model.Stat.Playerid, teamId = Model.Stat.Teamid }) | </span>
+    } 
     <a asp-page="./Index">Back to List</a>
 </div>

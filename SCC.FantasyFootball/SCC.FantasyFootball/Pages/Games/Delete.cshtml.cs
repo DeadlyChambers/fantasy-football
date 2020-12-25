@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 
 namespace SCC.FantasyFootball.Pages.Games
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : UpdateBasePage
     {
         private readonly IEntitiesManager<GameDto> _entitiesManager;
 

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Mvc;
 using SCC.FantasyFootball.Business.Managers;
-using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
+using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : UpdateBasePage
     {
         private readonly IEntitiesManager<TeamDto> _teamsManager;
 

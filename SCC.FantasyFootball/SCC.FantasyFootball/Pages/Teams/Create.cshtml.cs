@@ -9,10 +9,11 @@ using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Enums;
 using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
-    public class CreateModel : PageModel
+    public class CreateModel : CreateBasePage
     {
         private readonly IEntitiesManager<TeamDto> _teamsManager;
 

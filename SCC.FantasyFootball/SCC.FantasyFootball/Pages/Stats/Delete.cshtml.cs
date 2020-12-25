@@ -9,10 +9,11 @@ using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 
 namespace SCC.FantasyFootball.Pages.Stats
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : UpdateBasePage
     {
         private readonly IMultiEntitiesManager<StatDto> _statManager;
 
@@ -26,7 +27,7 @@ namespace SCC.FantasyFootball.Pages.Stats
         public async Task<IActionResult> OnGetAsync(int? gid, int? tid, int? pid)
         {
             ///Really all three of these have to be populated
-            if (gid == null)
+            if (gid == null || tid == null || pid == null)
             {
                 return NotFound();
             }

@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
+using SCC.FantasyFootball.Pages.Players;
 using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Games
 {
-    public class EditModel : PageModel
+    public class EditModel : UpdateBasePage
     {
         private readonly IEntitiesManager<GameDto> _entitiesManager;
         private readonly IEntitiesManager<TeamDto> _teamEntitiesManager;

@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SCC.FantasyFootball.Areas.Identity.Data;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DTO;
+using SCC.FantasyFootball.PagePolicy;
 using System.Threading.Tasks;
 
 
 namespace SCC.FantasyFootball.Pages.Players
 {
-    public class EditModel : PageModel
+   
+    public class EditModel : UpdateBasePage
     {
         private readonly IEntitiesManager<PlayerDto> _playersManager;
 
