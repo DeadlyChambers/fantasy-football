@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SCC.FantasyFootball.Common\SCC.FantasyFootball.Common.csproj" />
-    <ProjectReference Include="..\SCC.FantasyFootball\SCC.FantasyFootball.DataAccess\SCC.FantasyFootball.DataAccess.csproj" />
+    <ProjectReference Include="..\SCC.FantasyFootball.DataAccess\SCC.FantasyFootball.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

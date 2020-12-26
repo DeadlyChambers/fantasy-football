@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SCC.FantasyFootball.Areas.Identity.Data;
+using System;
+using System.Linq;
 
 namespace SCC.FantasyFootball.Data
 {
@@ -36,44 +34,10 @@ namespace SCC.FantasyFootball.Data
             {
                 if (entity.Name == "IdentityUser")
                     continue;
-                var currentTableName = "_"+builder.Entity(entity.Name).Metadata.GetDefaultTableName().Replace("<string>","");
+                var currentTableName = "_" + builder.Entity(entity.Name).Metadata.GetDefaultTableName().Replace("<string>", "");
                 builder.Entity(entity.Name).ToTable(currentTableName.ToLower());
             }
-            
 
-            //builder.Entity<SCCUser>(entity =>
-            //{
-            //    entity.ToTable(name: "IdUser");
-            //});
-            ////builder.Entity<IdentityUser>(entity =>
-            ////{
-            ////    entity.ToTable(name: "IdUser");
-            ////});
-            //builder.Entity<IdentityRole>(entity =>
-            //{
-            //    entity.ToTable(name: "IdRole");
-            //});
-            //builder.Entity<IdentityUserRole<string>>(entity =>
-            //{
-            //    entity.ToTable("IdUserRoles");
-            //});
-            //builder.Entity<IdentityUserClaim<string>>(entity =>
-            //{
-            //    entity.ToTable("IdUserClaims");
-            //});
-            //builder.Entity<IdentityUserLogin<string>>(entity =>
-            //{
-            //    entity.ToTable("IdUserLogins");
-            //});
-            //builder.Entity<IdentityRoleClaim<string>>(entity =>
-            //{
-            //    entity.ToTable("IdRoleClaims");
-            //});
-            //builder.Entity<IdentityUserToken<string>>(entity =>
-            //{
-            //    entity.ToTable("IdUserTokens");
-            //});
-          
         }
     }
 }

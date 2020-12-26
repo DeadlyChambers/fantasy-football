@@ -24,9 +24,7 @@ namespace SCC.FantasyFootball.DataAccess
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //Use the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. 
-                //For more guidance on storing connection strings,see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("ConnectionStrings:sccContext");
+                optionsBuilder.UseNpgsql("Data:DefaultConnection");
             }
         }
 
@@ -47,15 +45,19 @@ namespace SCC.FantasyFootball.DataAccess
 
                 entity.Property(e => e.Awayteamid).HasColumnName("awayteamid");
 
+                entity.Property(e => e.Createddate)
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("createddate");
+
                 entity.Property(e => e.Gamedate).HasColumnName("gamedate");
 
                 entity.Property(e => e.Homescore).HasColumnName("homescore");
 
                 entity.Property(e => e.Hometeamid).HasColumnName("hometeamid");
 
-                entity.Property(e => e.Createddate).HasColumnName("createddate");
-
-                entity.Property(e => e.Modifieddate).HasColumnName("modifieddate");
+                entity.Property(e => e.Modifieddate)
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("modifieddate");
 
                 entity.HasOne(d => d.Awayteam)
                     .WithMany(p => p.GameAwayteams)
@@ -148,9 +150,9 @@ namespace SCC.FantasyFootball.DataAccess
 
                 entity.Property(e => e.Passingcompletions).HasColumnName("passingcompletions");
 
-                entity.Property(e => e.Passingyards).HasColumnName("passingyards");
-
                 entity.Property(e => e.Passingtds).HasColumnName("passingtds");
+
+                entity.Property(e => e.Passingyards).HasColumnName("passingyards");
 
                 entity.Property(e => e.Points)
                     .HasPrecision(5, 2)
@@ -204,7 +206,6 @@ namespace SCC.FantasyFootball.DataAccess
                 entity.ToTable("teams");
 
                 entity.Property(e => e.Teamid)
-
                     .HasColumnName("teamid")
                     .UseIdentityAlwaysColumn();
 

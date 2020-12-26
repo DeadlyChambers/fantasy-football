@@ -15,7 +15,9 @@ namespace SCC.FantasyFootball.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<IdentityContext>(options =>
                     options.UseNpgsql(
-                        context.Configuration["ConnectionStrings:sccContext"]));
+                         context.Configuration["Data:DefaultConnection"]));
+
+            //context.Configuration["ConnectionStrings:sccContext"]));
 
                 services.AddIdentity<SCCUser, IdentityRole>(options =>
                 {

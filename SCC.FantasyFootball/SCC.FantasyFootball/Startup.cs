@@ -34,8 +34,8 @@ namespace SCC.FantasyFootball
             {
                 SCCPolicies.AddPageSpecificAuth(options);
             });
-           
 
+            
             services.AddAutoMapper((serviceProvider, autoMapper)=>
             {
                 autoMapper.AddProfile(new AutoMappingProfile());
@@ -43,7 +43,8 @@ namespace SCC.FantasyFootball
             }, AppDomain.CurrentDomain.GetAssemblies());
 
             _ = services.AddDbContext<FootballContext>(options =>
-            options.UseNpgsql(Configuration["ConnectionStrings:sccContext"]));
+           // options.UseNpgsql(Configuration["ConnectionStrings:sccContext"]));
+            options.UseNpgsql(Configuration["Data:DefaultConnection"]));
 
             ConfigureDI(services);
         }

@@ -18,7 +18,6 @@ namespace SCC.FantasyFootball.DataAccess
         public short Passingattempts { get; set; }
         public short Passingcompletions { get; set; }
         public short Passingyards { get; set; }
-        public short Passingtds { get; set; }
         public short Interceptions { get; set; }
         public short Fumbles { get; set; }
         public short Receptions { get; set; }
@@ -37,6 +36,7 @@ namespace SCC.FantasyFootball.DataAccess
         public short? Rzrush { get; set; }
         public bool Started { get; set; }
         public short Snaps { get; set; }
+        public short Passingtds { get; set; }
 
         public virtual Game Game { get; set; }
         public virtual Player Player { get; set; }
