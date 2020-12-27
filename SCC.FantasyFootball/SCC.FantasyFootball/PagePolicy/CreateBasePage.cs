@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SCC.FantasyFootball.Areas.Identity.Data;
+using SCC.FantasyFootball.DataAccess;
 
 namespace SCC.FantasyFootball.PagePolicy
 {

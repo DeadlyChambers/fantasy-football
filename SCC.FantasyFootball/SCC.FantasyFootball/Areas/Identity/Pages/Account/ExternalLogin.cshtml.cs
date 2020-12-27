@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using SCC.FantasyFootball.Areas.Identity.Data;
+using SCC.FantasyFootball.DataAccess;
 
 namespace SCC.FantasyFootball.Areas.Identity.Pages.Account
 {

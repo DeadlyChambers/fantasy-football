@@ -7,17 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball", "SCC.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.DataAccess", "SCC.FantasyFootball.DataAccess\SCC.FantasyFootball.DataAccess.csproj", "{C884F346-8C2A-4BFC-A9F0-CC9FDCBB8525}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.DTO", "..\SCC.FantasyFootball.DTO\SCC.FantasyFootball.DTO.csproj", "{841D0FEE-B124-4A69-8D06-5EB436A590B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Business", "SCC.FantasyFootball.Business\SCC.FantasyFootball.Business.csproj", "{A220DBB1-F3F7-4243-876D-84537A5D5D31}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D027C78B-7473-4907-BD63-FD55AFC89D5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Common", "SCC.FantasyFootball.Common\SCC.FantasyFootball.Common.csproj", "{B70F6D81-49E5-45D3-BB23-58E805D45048}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Tests.Unit", "..\SCC.FantasyFootball.Tests.Unit\SCC.FantasyFootball.Tests.Unit.csproj", "{4BB62141-5325-4B94-8DBE-70E5388BB3B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.DTO", "SCC.FantasyFootball.DTO\SCC.FantasyFootball.DTO.csproj", "{DA46BE77-36CB-44A6-8A89-625DB914A38A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Tests.Common", "..\SCC.FantasyFootball.Tests.Common\SCC.FantasyFootball.Tests.Common.csproj", "{4236CD16-95C7-4C25-84D6-040EBB3756FC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCC.FantasyFootball.Common", "..\SCC.FantasyFootball.Common\SCC.FantasyFootball.Common.csproj", "{8E535A41-4562-4279-A884-C17FAC5766D1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCC.FantasyFootball.Business", "SCC.FantasyFootball.Business\SCC.FantasyFootball.Business.csproj", "{A220DBB1-F3F7-4243-876D-84537A5D5D31}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{D7ADB95D-CBCA-4FEA-B371-911C11BC441E}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,33 +34,21 @@ Global
 		{C884F346-8C2A-4BFC-A9F0-CC9FDCBB8525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C884F346-8C2A-4BFC-A9F0-CC9FDCBB8525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C884F346-8C2A-4BFC-A9F0-CC9FDCBB8525}.Release|Any CPU.Build.0 = Release|Any CPU
-		{841D0FEE-B124-4A69-8D06-5EB436A590B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{841D0FEE-B124-4A69-8D06-5EB436A590B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{841D0FEE-B124-4A69-8D06-5EB436A590B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{841D0FEE-B124-4A69-8D06-5EB436A590B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4BB62141-5325-4B94-8DBE-70E5388BB3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4BB62141-5325-4B94-8DBE-70E5388BB3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4BB62141-5325-4B94-8DBE-70E5388BB3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4BB62141-5325-4B94-8DBE-70E5388BB3B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4236CD16-95C7-4C25-84D6-040EBB3756FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4236CD16-95C7-4C25-84D6-040EBB3756FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4236CD16-95C7-4C25-84D6-040EBB3756FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4236CD16-95C7-4C25-84D6-040EBB3756FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E535A41-4562-4279-A884-C17FAC5766D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E535A41-4562-4279-A884-C17FAC5766D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E535A41-4562-4279-A884-C17FAC5766D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E535A41-4562-4279-A884-C17FAC5766D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A220DBB1-F3F7-4243-876D-84537A5D5D31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B70F6D81-49E5-45D3-BB23-58E805D45048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70F6D81-49E5-45D3-BB23-58E805D45048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70F6D81-49E5-45D3-BB23-58E805D45048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70F6D81-49E5-45D3-BB23-58E805D45048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA46BE77-36CB-44A6-8A89-625DB914A38A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA46BE77-36CB-44A6-8A89-625DB914A38A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA46BE77-36CB-44A6-8A89-625DB914A38A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA46BE77-36CB-44A6-8A89-625DB914A38A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{4BB62141-5325-4B94-8DBE-70E5388BB3B6} = {D027C78B-7473-4907-BD63-FD55AFC89D5A}
-		{4236CD16-95C7-4C25-84D6-040EBB3756FC} = {D027C78B-7473-4907-BD63-FD55AFC89D5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B80DF992-DF77-4167-8555-AEFF25B7FC42}

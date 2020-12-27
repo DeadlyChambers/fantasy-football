@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+@{
+    var appVersion = SCC.FantasyFootball.DataAccess.Configuration.StartupDb.AppVersion ;
+   
+    var cicdVersion = SCC.FantasyFootball.DataAccess.Configuration.StartupDb.CICDVersion ?? "0";
+
+ }
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -39,6 +45,9 @@
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
+
+                 
+                    
                 </div>
             </div>
         </nav>
@@ -51,6 +60,15 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
+            <div class="version-bar">
+                <span class="version-record">
+                    App Version @appVersion                    
+                </span>
+                <span class="version-record">
+                    CICD Version @cicdVersion
+                </span>
+                <span class="version-spacer">  |  </span>
+            </div>
             &copy; 2020 - SCC.FantasyFootball - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>

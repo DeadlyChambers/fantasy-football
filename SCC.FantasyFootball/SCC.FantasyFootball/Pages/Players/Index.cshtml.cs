@@ -1,4 +1,5 @@
-﻿using SCC.FantasyFootball.Business.Managers;
+﻿using Microsoft.Extensions.Logging;
+using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.PagePolicy;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Players
 {
-    public class IndexModel : AnoynBase
+    public class IndexModel : AnoynBase<IndexModel>
     {
         private readonly IEntitiesManager<PlayerDto> _playersManager;
 
-        public IndexModel(IEntitiesManager<PlayerDto> playersManager)
+        public IndexModel(IEntitiesManager<PlayerDto> playersManager, ILogger<IndexModel> logger) : base(logger)
         {
             _playersManager = playersManager;
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DTO;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SCC.FantasyFootball.Pages.Games
 {
-    public class IndexModel : AnoynBase
+    public class IndexModel : AnoynBase<IndexModel>
     {
         private readonly IEntitiesManager<GameDto> _entitiesManager;
 
-        public IndexModel(IEntitiesManager<GameDto> entitiesManager)
+        public IndexModel(IEntitiesManager<GameDto> entitiesManager, ILogger<IndexModel> logger) : base(logger)
         {
             _entitiesManager = entitiesManager;
         }

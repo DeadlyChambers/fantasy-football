@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SCC.FantasyFootball.Areas.Identity.Data;
+using SCC.FantasyFootball.DataAccess;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.PagePolicy;

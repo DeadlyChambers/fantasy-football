@@ -1,15 +1,21 @@
-﻿using SCC.FantasyFootball.Business.Managers;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.EventSource;
+using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.PagePolicy;
 using System.Threading.Tasks;
+using SCC.FantasyFootball.Common.Utilities;
+using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {
-    public class IndexModel : AnoynBase
+    public class IndexModel : AnoynBase<IndexModel>
     {
+
         private readonly IEntitiesManager<TeamDto> _teamsManager;
-        public IndexModel(IEntitiesManager<TeamDto> teamsManager)
+        public IndexModel(IEntitiesManager<TeamDto> teamsManager, ILogger<IndexModel> logger):base(logger) 
         {
             _teamsManager = teamsManager;
         }
@@ -19,6 +25,8 @@ namespace SCC.FantasyFootball.Pages.Teams
 
         public async Task OnGetAsync(int? pageIndex)
         {
+            LogUserInfo();
+
             if (PagedRecords == null)
                 PagedRecords = new PagedList<TeamDto>();
             if (pageIndex.HasValue)

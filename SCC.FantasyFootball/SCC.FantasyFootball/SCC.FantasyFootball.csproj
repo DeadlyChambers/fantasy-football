@@ -1,9 +1,34 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>3bb7ee92-0ac3-4767-b307-e74f7890e6ee</UserSecretsId>
+    <Version>1</Version>
+    <Product>SCC.FantasyFootball</Product>
+    <Company>Shane Chambers Creations LLC</Company>
+    <Authors>Shane Chambers</Authors>
+    <Description>Simple app to prove CRUD operations using various underlying structures that are different from what I use on a daily basis</Description>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageTags>Practice</PackageTags>
+    <RepositoryUrl>https://github.com/DeadlyChambers/fantasy-football</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <AssemblyVersion>1.0.2.5</AssemblyVersion>
+    <FileVersion>1.0.2.5</FileVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="autoincrement_version.ps1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="autoincrement_version.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="5.0.0" />
@@ -17,6 +42,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
     <PackageReference Include="Npgsql" Version="5.0.1.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
@@ -26,5 +53,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SCC.FantasyFootball.Business\SCC.FantasyFootball.Business.csproj" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Debug'">
+    <Exec Command="PowerShell -ExecutionPolicy RemoteSigned $(ProjectDir)autoincrement_version.ps1 '$(ProjectDir)appsettings.json'" />
+  </Target>
 
 </Project>

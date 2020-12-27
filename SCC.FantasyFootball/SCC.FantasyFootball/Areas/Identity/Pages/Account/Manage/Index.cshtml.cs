@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SCC.FantasyFootball.Areas.Identity.Data;
+using SCC.FantasyFootball.DataAccess;
 
 namespace SCC.FantasyFootball.Areas.Identity.Pages.Account.Manage
 {
