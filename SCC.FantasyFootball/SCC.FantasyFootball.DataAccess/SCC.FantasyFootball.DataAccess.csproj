@@ -15,8 +15,4 @@
     <ProjectReference Include="..\SCC.FantasyFootball.Common\SCC.FantasyFootball.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Football\" />
-  </ItemGroup>
-
 </Project>
