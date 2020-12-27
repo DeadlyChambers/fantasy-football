@@ -60,6 +60,10 @@ namespace SCC.FantasyFootball.Business.Managers
             {
                 pageInformation.TotalRecords = await _context.Players.CountAsync();
                 var pagedInforationSanitized = new PagedList<T>(pageInformation);
+                if (pageInformation.TotalRecords == 0)
+                {
+                    return pagedInforationSanitized;
+                }
                 var totalToSkip = (pagedInforationSanitized.CurrentPage - 1) * pagedInforationSanitized.PageSize;
                 var recordsQ = _context.Players.Skip(totalToSkip)
                     .Take(pagedInforationSanitized.PageSize).IgnoreAutoIncludes();
@@ -70,7 +74,12 @@ namespace SCC.FantasyFootball.Business.Managers
             else if (typeT == typeof(GameDto))
             {
                 pageInformation.TotalRecords = await _context.Games.CountAsync();
+
                 var pagedInforationSanitized = new PagedList<T>(pageInformation);
+                if (pageInformation.TotalRecords == 0)
+                {
+                    return pagedInforationSanitized;
+                }
                 var totalToSkip = (pagedInforationSanitized.CurrentPage - 1) * pagedInforationSanitized.PageSize;
                 var recordsQ = _context.Games.Include(x => x.Hometeam).Include(x => x.Awayteam).Skip(totalToSkip)
                     .Take(pagedInforationSanitized.PageSize);
@@ -81,7 +90,12 @@ namespace SCC.FantasyFootball.Business.Managers
             else
             {
                 pageInformation.TotalRecords = await _context.Teams.CountAsync();
+               
                 var pagedInforationSanitized = new PagedList<T>(pageInformation);
+                if (pageInformation.TotalRecords == 0)
+                {
+                    return pagedInforationSanitized;
+                }
                 var totalToSkip = (pagedInforationSanitized.CurrentPage - 1) * pagedInforationSanitized.PageSize;
                 var recordsQ = _context.Teams.Skip(totalToSkip)
                     .Take(pagedInforationSanitized.PageSize).IgnoreAutoIncludes();

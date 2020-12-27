@@ -12,15 +12,13 @@ COPY ["*/SCC.FantasyFootball.Business.csproj", "SCC.FantasyFootball.Business/"]
 COPY ["*/SCC.FantasyFootball.DTO.csproj", "SCC.FantasyFootball.DTO/"]
 COPY ["*/SCC.FantasyFootball.DataAccess.csproj", "SCC.FantasyFootball.DataAccess/"]
 COPY ["*/SCC.FantasyFootball.Common.csproj", "SCC.FantasyFootball.Common/"]
-
 RUN dotnet restore "/src/SCC.FantasyFootball/SCC.FantasyFootball.csproj"
-COPY . .
-WORKDIR "/src/SCC.FantasyFootball"
-RUN dotnet build "SCC.FantasyFootball.csproj" -c Release -o /app/build
+COPY . ./
 
 FROM build AS publish
-RUN dotnet publish "SCC.FantasyFootball.csproj" -c Release -o /app/publish
-RUN dotnet tool install --global dotnet-ef
+WORKDIR /src/SCC.FantasyFootball
+RUN dotnet publish SCC.FantasyFootball.csproj -c Release -o /app/publish --no-restore
+#RUN dotnet tool install --global dotnet-ef
 
 #Thought about running some migration updates, but can just do EnsureInits in code
 #RUN dotnet ef datebase update --context FootballContext --o SCC.FantasyFootball.DataAccess

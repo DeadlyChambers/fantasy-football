@@ -2,18 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SCC.FantasyFootball.Data;
 
-namespace SCC.FantasyFootball.Migrations
+namespace SCC.FantasyFootball.DataAccess.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20201225040213_InitialCreate")]
-    partial class InitialCreate
+    partial class IdentityContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +48,37 @@ namespace SCC.FantasyFootball.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("_identityrole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "0",
+                            ConcurrencyStamp = "3fd00255-3a22-4a4d-807a-a61f9563b1ce",
+                            Name = "Anoynomous",
+                            NormalizedName = "ANOYNOMOUS"
+                        },
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "aaef57d3-46cf-4a4d-a61b-3fcc0896c08f",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "1690ac78-6afb-4f28-9dc5-7f6e54b294fc",
+                            Name = "Contributor",
+                            NormalizedName = "CONTRIBUTOR"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "4bb12d39-9d98-44cd-96d9-528b0c0fa3e7",
+                            Name = "Reader",
+                            NormalizedName = "READER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -80,7 +108,7 @@ namespace SCC.FantasyFootball.Migrations
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_role_claims_role_id");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("_identityroleclaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -110,19 +138,17 @@ namespace SCC.FantasyFootball.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_user_claims_user_id");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("_identityuserclaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("login_provider");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("provider_key");
 
                     b.Property<string>("ProviderDisplayName")
@@ -140,7 +166,7 @@ namespace SCC.FantasyFootball.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_user_logins_user_id");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("_identityuserlogin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -159,7 +185,7 @@ namespace SCC.FantasyFootball.Migrations
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_user_roles_role_id");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("_identityuserrole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -169,13 +195,11 @@ namespace SCC.FantasyFootball.Migrations
                         .HasColumnName("user_id");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("login_provider");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
                     b.Property<string>("Value")
@@ -185,10 +209,10 @@ namespace SCC.FantasyFootball.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name")
                         .HasName("pk_user_tokens");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("_identityusertoken");
                 });
 
-            modelBuilder.Entity("SCC.FantasyFootball.Areas.Identity.Data.SCCUser", b =>
+            modelBuilder.Entity("SCC.FantasyFootball.DataAccess.SCCUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
@@ -265,7 +289,7 @@ namespace SCC.FantasyFootball.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("_sccuser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -280,7 +304,7 @@ namespace SCC.FantasyFootball.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SCC.FantasyFootball.Areas.Identity.Data.SCCUser", null)
+                    b.HasOne("SCC.FantasyFootball.DataAccess.SCCUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_user_claims_asp_net_users_scc_user_id")
@@ -290,7 +314,7 @@ namespace SCC.FantasyFootball.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SCC.FantasyFootball.Areas.Identity.Data.SCCUser", null)
+                    b.HasOne("SCC.FantasyFootball.DataAccess.SCCUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_user_logins_asp_net_users_scc_user_id")
@@ -307,7 +331,7 @@ namespace SCC.FantasyFootball.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SCC.FantasyFootball.Areas.Identity.Data.SCCUser", null)
+                    b.HasOne("SCC.FantasyFootball.DataAccess.SCCUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_user_roles_asp_net_users_scc_user_id")
@@ -317,7 +341,7 @@ namespace SCC.FantasyFootball.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SCC.FantasyFootball.Areas.Identity.Data.SCCUser", null)
+                    b.HasOne("SCC.FantasyFootball.DataAccess.SCCUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_user_tokens_asp_net_users_scc_user_id")

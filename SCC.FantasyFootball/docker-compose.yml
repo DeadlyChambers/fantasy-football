@@ -1,35 +1,30 @@
-version: '3.4'
-
-networks:
-    scc-api:
-        driver: "bridge"
+version: '3.9'
 
 services:
     web:
-        image: 'fantasycontainer:latest'
+        image: ${DOCKER_REGISTRY-}web
         build:
-            context: ./api/
-            dockerfile: ./Docker/web/Dockerfile
+            context: .
+            dockerfile: Dockerfile
         ports:
            - "5000:80"
         depends_on:
-           - "postgres"
-        networks:
-           - scc-api
-    postgres:
-        image: fantasydb:latest
-        build:
-            context: ./postgres/
-            dockerfile: ./Docker/db/Dockerfile
+           - "db"
+        environment:
+            POSTGRES_HOST: "db"
+            POSTGRES_USER: $POSTGRES_USER
+            POSTGRES_PASSWORD : $POSTGRES_PASSWORD
+            POSTGRES_DB: $POSTGRES_DB
+    db:
+        image: postgres:latest
         ports:
             - "5432:5432"
         environment:
-            POSGRES_USER: "postgres"
-            POSTGRES_PASSWORD : "Snowboard1"
-            POSGRES_DB: "postgres"
+            POSTGRES_USER: $POSTGRES_USER
+            POSTGRES_PASSWORD : $POSTGRES_PASSWORD
+            POSTGRES_DB: $POSTGRES_DB
         volumes:
             - scc-volume:/var/lib/postgresql/data
-        networks:
-            - scc-api
+        
 volumes:
   scc-volume:

@@ -69,3 +69,14 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.version-bar{
+    display:inline;
+}
+.version-bar .version-record {
+    color:red;
+    font-weight:bold;
+}
+.version-bar .version-spacer {
+    padding:0px 10px;
+}

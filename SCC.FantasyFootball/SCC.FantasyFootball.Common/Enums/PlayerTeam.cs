@@ -1,4 +1,6 @@
-﻿namespace SCC.FantasyFootball.Common.Enums
+﻿using System;
+
+namespace SCC.FantasyFootball.Common.Enums
 {
     public enum TeamConferences
     {
@@ -41,11 +43,13 @@
         EXE, //Exempt
     }
 
-    public enum PlayerPosition
+    [Flags]
+    public enum PlayerPosition :int
     {
-        QB, 
-        WR,
-        RB,
-        TE,
+        None=1,
+        QB=2, 
+        WR=4,
+        RB=8,
+        TE=16,
     }
 }

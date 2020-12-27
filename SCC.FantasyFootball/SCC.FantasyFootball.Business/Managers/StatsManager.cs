@@ -33,6 +33,10 @@ namespace SCC.FantasyFootball.Business.Managers
         {
             pageInformation.TotalRecords = await _context.Stats.CountAsync();
             var pagedInforationSanitized = new PagedList<T>(pageInformation);
+            if (pageInformation.TotalRecords == 0)
+            {
+                return pagedInforationSanitized;
+            }
             var totalToSkip = (pagedInforationSanitized.CurrentPage - 1) * pagedInforationSanitized.PageSize;
             var recordsQ = _context.Stats.Skip(totalToSkip)
                 .Take(pagedInforationSanitized.PageSize).IgnoreAutoIncludes();

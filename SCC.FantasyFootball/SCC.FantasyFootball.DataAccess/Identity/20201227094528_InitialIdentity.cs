@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace SCC.FantasyFootball.Migrations
+namespace SCC.FantasyFootball.DataAccess.Identity
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace SCC.FantasyFootball.Migrations
                 name: "public");
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
+                name: "_identityrole",
                 schema: "public",
                 columns: table => new
                 {
@@ -27,7 +27,7 @@ namespace SCC.FantasyFootball.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "_sccuser",
                 schema: "public",
                 columns: table => new
                 {
@@ -53,7 +53,7 @@ namespace SCC.FantasyFootball.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "_identityroleclaim",
                 schema: "public",
                 columns: table => new
                 {
@@ -70,13 +70,13 @@ namespace SCC.FantasyFootball.Migrations
                         name: "fk_role_claims_asp_net_roles_identity_role_id",
                         column: x => x.role_id,
                         principalSchema: "public",
-                        principalTable: "AspNetRoles",
+                        principalTable: "_identityrole",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
+                name: "_identityuserclaim",
                 schema: "public",
                 columns: table => new
                 {
@@ -93,18 +93,18 @@ namespace SCC.FantasyFootball.Migrations
                         name: "fk_user_claims_asp_net_users_scc_user_id",
                         column: x => x.user_id,
                         principalSchema: "public",
-                        principalTable: "AspNetUsers",
+                        principalTable: "_sccuser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
+                name: "_identityuserlogin",
                 schema: "public",
                 columns: table => new
                 {
-                    login_provider = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    provider_key = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    login_provider = table.Column<string>(type: "text", nullable: false),
+                    provider_key = table.Column<string>(type: "text", nullable: false),
                     provider_display_name = table.Column<string>(type: "text", nullable: true),
                     user_id = table.Column<string>(type: "text", nullable: false)
                 },
@@ -115,13 +115,13 @@ namespace SCC.FantasyFootball.Migrations
                         name: "fk_user_logins_asp_net_users_scc_user_id",
                         column: x => x.user_id,
                         principalSchema: "public",
-                        principalTable: "AspNetUsers",
+                        principalTable: "_sccuser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
+                name: "_identityuserrole",
                 schema: "public",
                 columns: table => new
                 {
@@ -135,26 +135,26 @@ namespace SCC.FantasyFootball.Migrations
                         name: "fk_user_roles_asp_net_roles_identity_role_id",
                         column: x => x.role_id,
                         principalSchema: "public",
-                        principalTable: "AspNetRoles",
+                        principalTable: "_identityrole",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_user_roles_asp_net_users_scc_user_id",
                         column: x => x.user_id,
                         principalSchema: "public",
-                        principalTable: "AspNetUsers",
+                        principalTable: "_sccuser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
+                name: "_identityusertoken",
                 schema: "public",
                 columns: table => new
                 {
                     user_id = table.Column<string>(type: "text", nullable: false),
-                    login_provider = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    login_provider = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
                     value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -164,52 +164,64 @@ namespace SCC.FantasyFootball.Migrations
                         name: "fk_user_tokens_asp_net_users_scc_user_id",
                         column: x => x.user_id,
                         principalSchema: "public",
-                        principalTable: "AspNetUsers",
+                        principalTable: "_sccuser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "ix_role_claims_role_id",
+            migrationBuilder.InsertData(
                 schema: "public",
-                table: "AspNetRoleClaims",
-                column: "role_id");
+                table: "_identityrole",
+                columns: new[] { "id", "concurrency_stamp", "name", "normalized_name" },
+                values: new object[,]
+                {
+                    { "0", "3fd00255-3a22-4a4d-807a-a61f9563b1ce", "Anoynomous", "ANOYNOMOUS" },
+                    { "1", "aaef57d3-46cf-4a4d-a61b-3fcc0896c08f", "Admin", "ADMIN" },
+                    { "2", "1690ac78-6afb-4f28-9dc5-7f6e54b294fc", "Contributor", "CONTRIBUTOR" },
+                    { "3", "4bb12d39-9d98-44cd-96d9-528b0c0fa3e7", "Reader", "READER" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 schema: "public",
-                table: "AspNetRoles",
+                table: "_identityrole",
                 column: "normalized_name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "ix_role_claims_role_id",
+                schema: "public",
+                table: "_identityroleclaim",
+                column: "role_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_user_claims_user_id",
                 schema: "public",
-                table: "AspNetUserClaims",
+                table: "_identityuserclaim",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_logins_user_id",
                 schema: "public",
-                table: "AspNetUserLogins",
+                table: "_identityuserlogin",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_roles_role_id",
                 schema: "public",
-                table: "AspNetUserRoles",
+                table: "_identityuserrole",
                 column: "role_id");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 schema: "public",
-                table: "AspNetUsers",
+                table: "_sccuser",
                 column: "normalized_email");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 schema: "public",
-                table: "AspNetUsers",
+                table: "_sccuser",
                 column: "normalized_user_name",
                 unique: true);
         }
@@ -217,31 +229,31 @@ namespace SCC.FantasyFootball.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims",
+                name: "_identityroleclaim",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims",
+                name: "_identityuserclaim",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins",
+                name: "_identityuserlogin",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles",
+                name: "_identityuserrole",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens",
+                name: "_identityusertoken",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles",
+                name: "_identityrole",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers",
+                name: "_sccuser",
                 schema: "public");
         }
     }

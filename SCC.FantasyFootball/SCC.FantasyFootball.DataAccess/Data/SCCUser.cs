@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SCC.FantasyFootball.Areas.Identity.Data
+namespace SCC.FantasyFootball.DataAccess
 {
     // Add profile data for application users by adding properties to the SCCUser class
     public class SCCUser : IdentityUser

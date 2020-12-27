@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿
 
-namespace SCC.FantasyFootball.Areas.Identity.Data
+namespace SCC.FantasyFootball.DataAccess
 {
     /// <summary>
     /// Types of potential roles to be used for the website
@@ -38,20 +38,4 @@ namespace SCC.FantasyFootball.Areas.Identity.Data
         public const string Reader = "Reader";
     }
 
-    public static class SCCRoleExtensions
-    {
-        /// <summary>
-        /// Make sure the Identity retrieve is always the same Id, and String
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        public static IdentityRole AsIdentityRole(this SCCRoles role)
-        {
-
-            return new IdentityRole(role.ToString()) {
-                Id = ((int)role).ToString(),
-                NormalizedName = role.ToString().ToUpper()
-            };
-        }
-    }
 }

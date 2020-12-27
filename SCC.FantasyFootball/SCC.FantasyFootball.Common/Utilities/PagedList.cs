@@ -28,7 +28,7 @@ namespace SCC.FantasyFootball.Common.Utilities
                 CurrentPage = TotalPages;
         }
 
-        public IList<T> Items { get; set; }
+        public IList<T> Items { get; set; } = new List<T> { };
         public int PageSize { get; set; } = 4;
         public int CurrentPage { get; set; } = 1;
         public int TotalRecords { get; set; }

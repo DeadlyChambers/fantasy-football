@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SCC.FantasyFootball.Areas.Identity.Data;
+using SCC.FantasyFootball.DataAccess;
+using SCC.FantasyFootball.DataAccess.Extensions;
 using System;
 using System.Linq;
 

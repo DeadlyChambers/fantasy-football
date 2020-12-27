@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using SCC.FantasyFootball.Common.Enums;
+using SCC.FantasyFootball.DataAccess.Extensions;
+using System;
+using System.Linq;
 
 #nullable disable
 
@@ -6,13 +12,11 @@ namespace SCC.FantasyFootball.DataAccess
 {
     public partial class FootballContext : DbContext
     {
-        public FootballContext()
-        {
-        }
 
         public FootballContext(DbContextOptions<FootballContext> options)
             : base(options)
         {
+           // this.Database.Migrate();
         }
 
         public virtual DbSet<Game> Games { get; set; }
@@ -20,22 +24,26 @@ namespace SCC.FantasyFootball.DataAccess
         public virtual DbSet<Stat> Stats { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
 
+        public virtual DbSet<Position> Postitions { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql("Data:DefaultConnection");
-            }
-        }
+        => optionsBuilder
+       .UseSnakeCaseNamingConvention();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("public");
             modelBuilder.HasPostgresExtension("adminpack")
                 .HasAnnotation("Relational:Collation", "English_United States.1252");
 
+            // Ensure the Postions are statically loaded, migth need to move to top
+            var roles = Enum.GetValues<PlayerPosition>().Select(x => x.ToPositionEntity()).ToArray();
+            modelBuilder.Entity<Position>(e => e.HasData(roles));
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Game>(entity =>
             {
-                entity.ToTable("games");
+                entity.ToTable("games", "public");
 
                 entity.Property(e => e.Gameid)
                     .HasColumnName("gameid")
@@ -74,7 +82,7 @@ namespace SCC.FantasyFootball.DataAccess
 
             modelBuilder.Entity<Player>(entity =>
             {
-                entity.ToTable("players");
+                entity.ToTable("players", "public");
 
                 entity.Property(e => e.Playerid)
                     .HasColumnName("playerid")
@@ -128,7 +136,7 @@ namespace SCC.FantasyFootball.DataAccess
                 entity.HasKey(e => new { e.Gameid, e.Playerid, e.Teamid })
                     .HasName("uq_game_team_player");
 
-                entity.ToTable("stats");
+                entity.ToTable("stats", "public");
 
                 entity.Property(e => e.Gameid).HasColumnName("gameid");
 
@@ -203,7 +211,7 @@ namespace SCC.FantasyFootball.DataAccess
 
             modelBuilder.Entity<Team>(entity =>
             {
-                entity.ToTable("teams");
+                entity.ToTable("teams", "public");
 
                 entity.Property(e => e.Teamid)
                     .HasColumnName("teamid")
@@ -234,7 +242,21 @@ namespace SCC.FantasyFootball.DataAccess
                     .HasColumnName("name");
             });
 
+            modelBuilder.Entity<Position>(entity =>
+            {
+                entity.ToTable("positions", "public");
+
+                entity.Property(e => e.PositionId)
+                    .HasColumnName("positionid")
+                    .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(250)
+                    .HasColumnName("name");
+            });
+
             OnModelCreatingPartial(modelBuilder);
+          
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
