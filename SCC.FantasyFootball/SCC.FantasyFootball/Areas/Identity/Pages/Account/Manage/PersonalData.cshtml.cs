@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +9,7 @@ using SCC.FantasyFootball.DataAccess;
 
 namespace SCC.FantasyFootball.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Roles = SCCRoleConst.Admin)]
     public class PersonalDataModel : PageModel
     {
         private readonly UserManager<SCCUser> _userManager;

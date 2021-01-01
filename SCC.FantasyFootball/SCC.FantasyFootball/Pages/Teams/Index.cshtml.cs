@@ -1,13 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.EventSource;
 using SCC.FantasyFootball.Business.Managers;
 using SCC.FantasyFootball.Common.Utilities;
 using SCC.FantasyFootball.DTO;
 using SCC.FantasyFootball.PagePolicy;
 using System.Threading.Tasks;
-using SCC.FantasyFootball.Common.Utilities;
-using System.Security.Cryptography.X509Certificates;
-using System.Linq;
 
 namespace SCC.FantasyFootball.Pages.Teams
 {

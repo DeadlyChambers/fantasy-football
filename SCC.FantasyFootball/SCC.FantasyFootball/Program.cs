@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SCC.FantasyFootball.Data;
 using SCC.FantasyFootball.DataAccess;
+using System;
+using System.Linq;
 
 namespace SCC.FantasyFootball
 {
@@ -14,17 +16,32 @@ namespace SCC.FantasyFootball
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {
-                var db = scope.ServiceProvider.GetRequiredService<FootballContext>();
-                db.Database.Migrate();
-                db.SaveChanges();
-                //db.Database.EnsureCreated();
+                try
+                {
+                    var db = scope.ServiceProvider.GetRequiredService<FootballContext>();
+                    var migs = db.Database.GetPendingMigrations();
+                    if (migs.Any())
+                        db.Database.Migrate();
+                    db.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    //Looks like a pre-existing db will fail...sort of a pain
+                }
             }
             using (var scope = host.Services.CreateScope())
             {
+                try { 
                 var db = scope.ServiceProvider.GetRequiredService<IdentityContext>();
-                db.Database.Migrate();
+                var migs = db.Database.GetPendingMigrations();
+                if (migs.Any())
+                    db.Database.Migrate();
                 db.SaveChanges();
-                //db.Database.EnsureCreated();
+                }
+                catch (Exception ex)
+                {
+                    //Looks like a pre-existing db will fail...sort of a pain
+                }
             }
           
             host.Run();
